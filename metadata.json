@@ -1,0 +1,6 @@
+{
+  "name": "URIJIP",
+  "description": "A premium, cinematic, immersive birthday website and digital love story celebrating Urijip and Starlight.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

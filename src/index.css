@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+    /* Theme Tokens for Phase 1 and Future Phases */
+    --color-bg-base: #04060A;
+    --color-midnight: #070B12;
+    --color-charcoal: #0E141D;
+    --color-starlight: #FFFFFF;
+    --color-starlight-soft: #EAEFF8;
+    --color-starlight-glow: rgba(220, 235, 255, 0.7);
+
+    /* Future Chapter Tokens (Evolution System) */
+    --color-phase-black: #04060A;
+    --color-phase-midnight: #0A1128;
+    --color-phase-violet: #2C1654;
+    --color-phase-rose: #7D2E68;
+    --color-phase-bubblegum: #E880B9;
+    --color-phase-warm-cream: #FAF5EB;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-base);
+    color: var(--color-starlight-soft);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-color: #04060A;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-body {
+  font-family: var(--font-sans);
+}
+
+/* Atmospheric subtle glow utilities */
+.starlight-text-glow {
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.45), 0 0 60px rgba(180, 210, 255, 0.25);
+}
+
+.starlight-heavy-glow {
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.9), 0 0 36px rgba(210, 235, 255, 0.7), 0 0 75px rgba(160, 210, 255, 0.45), 0 0 120px rgba(130, 185, 255, 0.25);
+}
+
+.starlight-orb-glow {
+  box-shadow: 0 0 35px 8px rgba(255, 255, 255, 0.5), 0 0 80px 20px rgba(160, 200, 255, 0.3);
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #04060A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
