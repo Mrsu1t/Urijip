@@ -17,42 +17,63 @@ export const AmbientBackground: React.FC<AmbientBackgroundProps> = ({
       style={{ zIndex: Z_INDEX_TOKENS.ambientGlow }}
       aria-hidden="true"
     >
-      {/* Base deep atmospheric sky gradient */}
+      {/* 1. Deep Space Spectrum Base (Absolute Black to Muted Violet #1C1028) */}
+      <div
+        className="absolute inset-0 bg-[#000000] transition-opacity duration-1000"
+        style={{
+          background: 'linear-gradient(135deg, #000000 0%, #05050a 40%, #1c1028 100%)',
+        }}
+      />
+
+      {/* 2. Soft Nebula Pink (#D46CA6) Corner & Atmospheric Screen Layer */}
+      <div
+        className="absolute top-[-10%] right-[-10%] w-[65vw] max-w-[800px] h-[55vh] max-h-[600px] rounded-full blur-[140px] pointer-events-none transition-all duration-1000"
+        style={{
+          background: 'radial-gradient(circle at 70% 30%, rgba(212, 108, 166, 0.16) 0%, rgba(211, 192, 224, 0.08) 50%, transparent 80%)',
+          mixBlendMode: 'screen',
+          opacity: Math.max(0.35, 0.85 - scrollProgress * 0.2),
+        }}
+      />
+      <div
+        className="absolute bottom-[-10%] left-[-10%] w-[55vw] max-w-[700px] h-[45vh] max-h-[500px] rounded-full blur-[130px] pointer-events-none transition-all duration-1000"
+        style={{
+          background: 'radial-gradient(circle at 30% 70%, rgba(212, 108, 166, 0.12) 0%, rgba(79, 65, 92, 0.1) 60%, transparent 80%)',
+          mixBlendMode: 'screen',
+          opacity: Math.max(0.25, 0.7 - scrollProgress * 0.2),
+        }}
+      />
+
+      {/* 3. Shimmering Aurora & Cosmic Dust Curtains */}
+      <div
+        id="aurora-borealis"
+        className="aurora-container"
+        style={{
+          opacity: Math.max(0.32, 0.82 - scrollProgress * 0.25),
+        }}
+      >
+        <div className="aurora-curtain-1" />
+        <div className="aurora-curtain-2" />
+        <div className="aurora-curtain-3" />
+      </div>
+
+      {/* 4. Subtle Starlight Lavender Atmospheric Horizon Glow */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[85vw] max-w-[1100px] h-[35vh] max-h-[450px] rounded-full blur-[120px] pointer-events-none transition-all duration-1000"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(211, 192, 224, 0.18) 0%, rgba(212, 108, 166, 0.12) 40%, transparent 80%)',
+          opacity: Math.max(0.25, 0.75 - scrollProgress * 0.3),
+        }}
+      />
+
+      {/* 5. Cinematic Soft Natural Vignette */}
       <div
         className="absolute inset-0 transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(ellipse 90% 75% at 50% 35%, #0A121F 0%, #060910 50%, #04060A 100%)',
-          opacity: 1 - scrollProgress * 0.3,
-        }}
-      />
-
-      {/* Subtle midnight-blue focal glow */}
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] max-w-[850px] h-[50vh] max-h-[600px] rounded-full blur-[110px] pointer-events-none transition-all duration-1000"
-        style={{
-          background: 'radial-gradient(circle, rgba(20, 36, 62, 0.45) 0%, rgba(10, 18, 32, 0.15) 60%, transparent 100%)',
-          transform: `translate(-50%, calc(-50% - ${scrollProgress * 50}px)) scale(${1 + scrollProgress * 0.15})`,
-          opacity: Math.max(0.3, 0.8 - scrollProgress * 0.4),
-        }}
-      />
-
-      {/* Subtle starlight warmth accent aura */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] max-w-[400px] h-[40vw] max-h-[400px] rounded-full blur-[80px] pointer-events-none transition-opacity duration-1000"
-        style={{
-          background: 'radial-gradient(circle, rgba(160, 200, 255, 0.08) 0%, rgba(200, 220, 255, 0.02) 50%, transparent 100%)',
-          opacity: 0.6,
-        }}
-      />
-
-      {/* Cinematic subtle vignette to softly frame the viewport without darkening corners excessively */}
-      <div
-        className="absolute inset-0 transition-opacity duration-1000"
-        style={{
-          boxShadow: 'inset 0 0 160px 40px rgba(2, 3, 5, 0.45)',
-          opacity: Math.max(0.15, 0.6 - scrollProgress * 0.45),
+          boxShadow: 'inset 0 0 180px 60px rgba(0, 0, 0, 0.8)',
         }}
       />
     </div>
   );
 };
+
+

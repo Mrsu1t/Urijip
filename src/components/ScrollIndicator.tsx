@@ -27,12 +27,12 @@ export const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
       onClick={onClick}
       aria-label="Scroll down to begin experience"
     >
-      <span className="font-body text-[clamp(0.72rem,1.4vw,0.85rem)] uppercase tracking-[0.26em] text-white/50 hover:text-white/80 transition-colors duration-300 font-medium">
+      <span className="font-mono-label text-[11px] sm:text-xs tracking-[0.25em] text-[#e2e2e2] hover:text-[#ffafd7] transition-colors duration-300 font-medium text-shadow-subtle">
         Scroll to begin
       </span>
 
       {/* Subtle, elegant breathing indicator stem */}
-      <div className="relative w-[1px] h-9 bg-gradient-to-b from-white/30 via-white/10 to-transparent overflow-hidden">
+      <div className="relative w-[1px] h-9 bg-gradient-to-b from-[#ffafd7]/40 via-white/20 to-transparent overflow-hidden">
         <motion.div
           animate={{
             y: [-12, 36],
@@ -43,7 +43,7 @@ export const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="w-full h-3 bg-gradient-to-b from-transparent via-white/90 to-transparent"
+          className="w-full h-3 bg-gradient-to-b from-transparent via-[#ffafd7] to-transparent"
         />
       </div>
     </motion.div>

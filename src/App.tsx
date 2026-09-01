@@ -29,6 +29,7 @@ import { ConstellationEasterEgg } from './components/ConstellationEasterEgg';
 import { HiddenMoon } from './components/HiddenMoon';
 import { MoonUniverseExperience } from './components/MoonUniverseExperience';
 import { TransitionInfrastructure } from './components/TransitionInfrastructure';
+import { BackgroundAudioController } from './components/BackgroundAudioController';
 import { AudioProvider } from './context/AudioContext';
 
 export default function App() {
@@ -79,11 +80,11 @@ export default function App() {
   // In Phase 2: As photograph reveals (0.4 -> 0.8), gently dim stars.
   // In Phase 3: As user travels into memory, stars return to deep night radiance.
   // In Phase 4: Stars pulse with deep midnight starlight clarity, brightening gently as midnight arrives.
-  // In Phase 5: Early in chapter, subtle stars exist; midway, fewer stars with warmer glow; near end, a meaningful few remain amidst dusty rose tones.
+  // In Phase 5: Early in chapter, subtle stars exist; midway, fewer stars with warmer glow; near end, a meaningful few remain amidst serene starlight tones.
   // In Phase 6 (URIJIP): Stars represent warmth, memory & belonging.
   // In Phase 7 (THINGS I NOTICE): Warm morning environment inside home with calm subtle drifting stars.
   // In Phase 8 (THE SAFE PLACE): Stars are almost motionless, like faint distant memories ("The night is still there. But it no longer feels lonely.").
-  // In Phase 11 (HER BIRTHDAY): Faint stars accompany warm rose/cream, returning to full midnight brilliance as the chapter darkens.
+  // In Phase 11 (HER BIRTHDAY): Faint stars accompany warm moonlight/cyan glow, returning to full midnight brilliance as the chapter darkens.
   // In Phase 12 (THE SECOND PHASE): Warm, gentle stars accompany the anticipation and transition toward the playlist and eternal home.
   const starDensityModifier =
     phaseTwelveProgress > 0.02
@@ -158,6 +159,9 @@ export default function App() {
         id="urijip-app-root"
         className="relative min-h-[6600vh] w-full bg-[#04060A] text-[#EAEFF8] font-body selection:bg-white/20 selection:text-white"
       >
+        {/* Top-Left Background Audio Play/Pause Controller */}
+        <BackgroundAudioController />
+
         {/* 1. Procedural Star Field Canvas (Fixed viewport layer) */}
         <StarField
           density={starDensityModifier}

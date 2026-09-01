@@ -59,19 +59,32 @@ export function useChapterAudio({
 
     const audio = new Audio();
     audioRef.current = audio;
-    audio.preload = 'metadata';
+    audio.preload = 'auto';
     audio.src = src;
 
     const handleLoadedMetadata = () => {
-      if (audio.duration && !isNaN(audio.duration)) {
+      if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
         setDuration(audio.duration);
       }
       setIsLoading(false);
       setError(null);
     };
 
+    const handleDurationChange = () => {
+      if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
+
+    const handleCanPlay = () => {
+      if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
+      setIsLoading(false);
+    };
+
     const handleTimeUpdate = () => {
-      if (audio.duration && !isNaN(audio.duration) && audio.duration > 0) {
+      if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration) && audio.duration > 0) {
         setCurrentTime(audio.currentTime);
         setProgress(Math.min(1, Math.max(0, audio.currentTime / audio.duration)));
       }
@@ -85,20 +98,24 @@ export function useChapterAudio({
     };
 
     const handleAudioError = () => {
-      // Gracefully handle missing/unreachable audio source without crashing
       setIsLoading(false);
       setIsPlaying(false);
-      setError('Audio file not yet attached');
-      onError?.(new Error('Audio file unavailable'));
+      console.warn('Audio element error, falling back to simulated playback if triggered');
+      setError('Audio file stream issue');
+      onError?.(new Error('Audio file stream issue'));
     };
 
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('durationchange', handleDurationChange);
+    audio.addEventListener('canplay', handleCanPlay);
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('ended', handleAudioEnded);
     audio.addEventListener('error', handleAudioError);
 
     return () => {
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('durationchange', handleDurationChange);
+      audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('ended', handleAudioEnded);
       audio.removeEventListener('error', handleAudioError);

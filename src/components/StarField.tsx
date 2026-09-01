@@ -1,6 +1,25 @@
 import React, { useEffect, useRef } from 'react';
-import { StarParticle, StarFieldProps } from '../types';
+import { StarFieldProps } from '../types';
 import { Z_INDEX_TOKENS } from '../tokens';
+
+interface StarConfig {
+  count: number;
+  sizeMin: number;
+  sizeMax: number;
+  baseOpacity: number;
+  twinkleSpeed: number;
+  twinkleAmount: number;
+  sparkle?: boolean;
+}
+
+interface StarItem {
+  x: number;
+  y: number;
+  size: number;
+  phase: number;
+  speed: number;
+  color: string;
+}
 
 export const StarField: React.FC<StarFieldProps> = ({
   density = 1,
@@ -9,7 +28,6 @@ export const StarField: React.FC<StarFieldProps> = ({
   className = '',
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const starsRef = useRef<StarParticle[]>([]);
   const animationFrameIdRef = useRef<number | null>(null);
   const mouseRef = useRef<{ x: number; y: number; targetX: number; targetY: number }>({
     x: 0,
@@ -27,88 +45,96 @@ export const StarField: React.FC<StarFieldProps> = ({
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    const initStars = () => {
+    // Refined star layers: Delicate, tiny pinpoint stars mimicking a crisp clear night sky
+    const layerConfigs: StarConfig[] = [
+      // LAYER 1: Ultra-tiny distant background pinpoints
+      {
+        count: Math.round(520 * density),
+        sizeMin: 0.4,
+        sizeMax: 0.85,
+        baseOpacity: 0.35,
+        twinkleSpeed: 0.15 * speedMultiplier,
+        twinkleAmount: 0.2,
+      },
+      // LAYER 2: Crisp mid-ground night stars with subtle twinkle
+      {
+        count: Math.round(220 * density),
+        sizeMin: 0.8,
+        sizeMax: 1.4,
+        baseOpacity: 0.65,
+        twinkleSpeed: 0.35 * speedMultiplier,
+        twinkleAmount: 0.3,
+      },
+      // LAYER 3: Bright focal gems with diamond cross-shimmer
+      {
+        count: Math.max(10, Math.round(30 * density)),
+        sizeMin: 1.4,
+        sizeMax: 2.4,
+        baseOpacity: 0.95,
+        twinkleSpeed: 0.22 * speedMultiplier,
+        twinkleAmount: 0.35,
+        sparkle: true,
+      },
+    ];
+
+    const starPalettes = [
+      'rgba(255, 255, 255,',
+      'rgba(240, 246, 255,',
+      'rgba(230, 255, 250,',
+      'rgba(255, 245, 250,',
+    ];
+
+    let starLayers: { config: StarConfig; stars: StarItem[] }[] = [];
+
+    const generateStars = () => {
       width = canvas.clientWidth;
       height = canvas.clientHeight;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // Balanced count based on screen area to ensure smooth 60fps across mobile and desktop
-      const area = width * height;
-      const baseCount = Math.floor((area / 7000) * density);
-      const totalStars = Math.max(70, Math.min(baseCount, 260));
-
-      const stars: StarParticle[] = [];
-
-      for (let i = 0; i < totalStars; i++) {
-        // Layer distribution: 60% Layer 1 (deep distant), 30% Layer 2 (mid), 10% Layer 3 (foreground soft glow)
-        const randLayer = Math.random();
-        let layer: 1 | 2 | 3 = 1;
-        let size = 0.6 + Math.random() * 0.7;
-        let baseAlpha = 0.2 + Math.random() * 0.4;
-        let color = '#EAEFF8';
-
-        if (randLayer > 0.9) {
-          layer = 3;
-          size = 1.4 + Math.random() * 1.0;
-          baseAlpha = 0.65 + Math.random() * 0.35;
-          color = Math.random() > 0.4 ? '#FFFFFF' : '#E0ECFF';
-        } else if (randLayer > 0.6) {
-          layer = 2;
-          size = 0.9 + Math.random() * 0.8;
-          baseAlpha = 0.4 + Math.random() * 0.4;
-          color = Math.random() > 0.3 ? '#EDF2FA' : '#D9E6FA';
+      starLayers = layerConfigs.map((config) => {
+        const stars: StarItem[] = [];
+        for (let i = 0; i < config.count; i++) {
+          stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: config.sizeMin + Math.random() * (config.sizeMax - config.sizeMin),
+            phase: Math.random() * Math.PI * 2,
+            speed: config.twinkleSpeed * (0.7 + Math.random() * 0.6),
+            color: starPalettes[Math.floor(Math.random() * starPalettes.length)],
+          });
         }
-
-        const x = Math.random() * width;
-        const y = Math.random() * height;
-
-        stars.push({
-          x,
-          y,
-          baseX: x,
-          baseY: y,
-          size,
-          baseAlpha,
-          twinkleSpeed: 0.008 + Math.random() * 0.018,
-          twinklePhase: Math.random() * Math.PI * 2,
-          layer,
-          color,
-        });
-      }
-
-      starsRef.current = stars;
+        return { config, stars };
+      });
     };
 
-    initStars();
+    generateStars();
 
     const resizeObserver = new ResizeObserver(() => {
-      initStars();
+      generateStars();
     });
-
     resizeObserver.observe(canvas);
 
-    // Subtle cursor/touch interaction for gentle organic depth
+    // Pointer interaction for gentle spatial depth
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
       const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
       const normX = (clientX / (window.innerWidth || 1) - 0.5) * 2;
       const normY = (clientY / (window.innerHeight || 1) - 0.5) * 2;
-      mouseRef.current.targetX = normX * 18;
-      mouseRef.current.targetY = normY * 18;
+      mouseRef.current.targetX = normX * 10;
+      mouseRef.current.targetY = normY * 10;
     };
 
     window.addEventListener('mousemove', handlePointerMove, { passive: true });
     window.addEventListener('touchmove', handlePointerMove, { passive: true });
 
-    let lastTime = performance.now();
+    let startTime = performance.now();
 
-    const render = (time: number) => {
-      const dt = Math.min((time - lastTime) / 1000, 0.1);
-      lastTime = time;
+    const render = (now: number) => {
+      const t = (now - startTime) / 1000;
 
       // Smooth mouse easing
       mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.03;
@@ -116,66 +142,60 @@ export const StarField: React.FC<StarFieldProps> = ({
 
       ctx.clearRect(0, 0, width, height);
 
-      const stars = starsRef.current;
-      const len = stars.length;
-      const scrollShift = scrollProgress * 120;
+      const scrollShift = scrollProgress * 50;
 
-      for (let i = 0; i < len; i++) {
-        const star = stars[i];
+      starLayers.forEach((layer, layerIdx) => {
+        const { config, stars } = layer;
+        const parallax = layerIdx === 2 ? 0.9 : layerIdx === 1 ? 0.5 : 0.2;
 
-        // Layer-dependent slow organic drift and parallax weight
-        const layerDriftRate = star.layer === 3 ? 0.06 : star.layer === 2 ? 0.03 : 0.015;
-        const layerParallax = star.layer === 3 ? 1.0 : star.layer === 2 ? 0.6 : 0.25;
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
 
-        // Extremely slow natural drifting upward/sideways
-        star.y -= layerDriftRate * speedMultiplier * (dt * 60);
-        star.x += layerDriftRate * 0.3 * speedMultiplier * (dt * 60);
+          let opacity = config.baseOpacity;
+          if (config.twinkleSpeed > 0) {
+            const flicker = Math.sin(t * s.speed + s.phase);
+            opacity = config.baseOpacity + flicker * config.twinkleAmount;
+            opacity = Math.max(0.1, Math.min(1, opacity));
+          }
 
-        // Wrap around viewport boundaries seamlessly
-        if (star.y < -10) star.y = height + 10;
-        if (star.y > height + 10) star.y = -10;
-        if (star.x < -10) star.x = width + 10;
-        if (star.x > width + 10) star.x = -10;
+          let renderX = (s.x + mouseRef.current.x * parallax) % width;
+          let renderY = (s.y - scrollShift * parallax + mouseRef.current.y * parallax) % height;
+          if (renderX < 0) renderX += width;
+          if (renderY < 0) renderY += height;
 
-        // Subtle organic sine twinkle
-        star.twinklePhase += star.twinkleSpeed * (dt * 60);
-        const twinkleMod = Math.sin(star.twinklePhase) * 0.35;
-        const currentAlpha = Math.max(0.08, Math.min(1, star.baseAlpha + twinkleMod));
+          // Sparkle 4-point cross for large bright stars
+          if (config.sparkle && s.size > 1.8) {
+            const cx = renderX;
+            const cy = renderY;
+            const r = s.size * 2.5;
 
-        // Calculated render position with smooth parallax and scroll offsets
-        const posX = star.x + mouseRef.current.x * layerParallax;
-        const posY = star.y - scrollShift * layerParallax + mouseRef.current.y * layerParallax;
+            ctx.save();
+            ctx.globalAlpha = opacity * 0.85;
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+            grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+            grad.addColorStop(0.5, 'rgba(200, 240, 255, 0.4)');
+            grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
 
-        // Soft rendering of stars
-        ctx.fillStyle = star.color;
-        ctx.globalAlpha = currentAlpha;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(cx - r * 1.2, cy);
+            ctx.lineTo(cx + r * 1.2, cy);
+            ctx.moveTo(cx, cy - r * 1.2);
+            ctx.lineTo(cx, cy + r * 1.2);
+            ctx.stroke();
+            ctx.restore();
+          }
 
-        if (star.layer === 3) {
-          // Foreground luminous star with subtle soft corona
-          const gradient = ctx.createRadialGradient(
-            posX,
-            posY,
-            0,
-            posX,
-            posY,
-            star.size * 2.8
-          );
-          gradient.addColorStop(0, star.color);
-          gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.4)');
-          gradient.addColorStop(1, 'rgba(210, 230, 255, 0)');
-          ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(posX, posY, star.size * 2.8, 0, Math.PI * 2);
-          ctx.fill();
-        } else {
-          // Standard and distant crisp stars
-          ctx.beginPath();
-          ctx.arc(posX, posY, star.size, 0, Math.PI * 2);
+          ctx.fillStyle = `${s.color}${opacity})`;
+          ctx.arc(renderX, renderY, s.size / 2, 0, Math.PI * 2);
           ctx.fill();
         }
-      }
+      });
 
-      ctx.globalAlpha = 1.0;
       animationFrameIdRef.current = requestAnimationFrame(render);
     };
 

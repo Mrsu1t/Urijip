@@ -76,14 +76,14 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
   };
 
   // -------------------------------------------------------------
-  // COLOR EVOLUTION ATMOSPHERE (Deep Night -> Violet -> Muted Rose -> Dusty Rose)
+  // COLOR EVOLUTION ATMOSPHERE (Deep Night -> Indigo -> Cyan / Teal -> Starlight)
   // -------------------------------------------------------------
-  // Violet aura (0.05 -> 0.40)
-  const violetAlpha = range(scrollProgress, 0.05, 0.35, 0, 0.45);
-  // Muted Rose aura (0.30 -> 0.70)
-  const mutedRoseAlpha = range(scrollProgress, 0.30, 0.65, 0, 0.55);
-  // Dusty Rose warm home glow (0.60 -> 1.00)
-  const dustyRoseAlpha = range(scrollProgress, 0.60, 0.95, 0, 0.65);
+  // Indigo / Night sky aura (0.05 -> 0.40)
+  const indigoAlpha = range(scrollProgress, 0.05, 0.35, 0, 0.45);
+  // Aurora Cyan aura (0.30 -> 0.70)
+  const auroraCyanAlpha = range(scrollProgress, 0.30, 0.65, 0, 0.4);
+  // Starlight warm home glow (0.60 -> 1.00)
+  const starlightAlpha = range(scrollProgress, 0.60, 0.95, 0, 0.35);
 
   // -------------------------------------------------------------
   // SCROLL PROGRESS INTERPOLATION CHOREOGRAPHY (0.00 to 1.00)
@@ -157,35 +157,35 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
     >
       {/* ------------------------------------------------------------- */}
       {/* ATMOSPHERIC COLOR TRANSFORMATION LAYERS                       */}
-      {/* Deep Night -> Violet -> Muted Rose -> Dusty Rose Warm Home   */}
+      {/* Deep Night -> Indigo -> Cyan / Aurora -> Starlight Warm Home  */}
       {/* ------------------------------------------------------------- */}
 
-      {/* Layer A: Deep Violet Atmosphere */}
+      {/* Layer A: Deep Indigo / Night Sky Atmosphere */}
       <div
         className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 45%, rgba(44, 22, 84, 0.45) 0%, rgba(20, 10, 42, 0.2) 60%, transparent 85%)',
-          opacity: violetAlpha,
+          background: 'radial-gradient(ellipse 80% 70% at 50% 45%, rgba(15, 23, 42, 0.65) 0%, rgba(10, 15, 30, 0.35) 60%, transparent 85%)',
+          opacity: indigoAlpha,
           zIndex: Z_INDEX_TOKENS.ambientGlow + 2,
         }}
       />
 
-      {/* Layer B: Muted Rose Intimacy Aura */}
+      {/* Layer B: Aurora Cyan Intimacy Aura */}
       <div
         className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(125, 46, 104, 0.4) 0%, rgba(68, 22, 58, 0.15) 55%, transparent 80%)',
-          opacity: mutedRoseAlpha,
+          background: 'radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 0%, rgba(16, 185, 129, 0.08) 55%, transparent 80%)',
+          opacity: auroraCyanAlpha,
           zIndex: Z_INDEX_TOKENS.ambientGlow + 3,
         }}
       />
 
-      {/* Layer C: Dusty Rose Warm "Home" Glow */}
+      {/* Layer C: Starlight Warm "Home" Glow */}
       <div
         className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(ellipse at 50% 55%, rgba(195, 120, 150, 0.35) 0%, rgba(140, 60, 95, 0.18) 50%, transparent 85%)',
-          opacity: dustyRoseAlpha,
+          background: 'radial-gradient(ellipse at 50% 55%, rgba(255, 255, 255, 0.1) 0%, rgba(56, 189, 248, 0.06) 50%, transparent 85%)',
+          opacity: starlightAlpha,
           zIndex: Z_INDEX_TOKENS.ambientGlow + 4,
         }}
       />
@@ -196,11 +196,11 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
         {/* Top Header / Chapter V Milestone Marker */}
         <header className="w-full flex flex-col items-center flex-shrink-0 z-30 pt-2">
           <div className="flex items-center gap-3">
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-rose-200/30" />
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-rose-100/70 font-medium">
+            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
+            <span className="font-body text-[11px] sm:text-xs uppercase tracking-[0.3em] text-slate-200 font-semibold text-shadow-subtle">
               Chapter V • The First Meeting
             </span>
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-rose-200/30" />
+            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
           </div>
         </header>
 
@@ -217,18 +217,18 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: titleOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.28em] text-rose-200/70 font-medium">
-                18 February 2026
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20">
+                18 FEBRUARY 2026
               </span>
             </div>
             <h2
               id="the-day-we-finally-met-title"
-              className="font-editorial text-[clamp(2.35rem,7.5vw,5.25rem)] font-bold text-white uppercase tracking-[0.14em] sm:tracking-[0.2em] starlight-heavy-glow leading-none select-none mb-4"
+              className="font-editorial text-[clamp(2.45rem,7.8vw,5.5rem)] font-bold text-white uppercase tracking-[0.14em] sm:tracking-[0.2em] starlight-heavy-glow leading-none select-none mb-4"
             >
               THE DAY WE FINALLY MET
             </h2>
-            <p className="font-editorial italic text-[clamp(1.1rem,2.8vw,1.65rem)] text-rose-100/80 tracking-wide max-w-md mx-auto">
+            <p className="font-editorial italic text-[clamp(1.2rem,3vw,1.85rem)] text-[#e2e2e2] font-medium tracking-wide max-w-md mx-auto text-shadow-subtle">
               When the voices across the screen stepped into reality.
             </p>
           </div>
@@ -243,20 +243,20 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: familiarOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-rose-200/60">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
               The First Second
             </span>
-            <p className="font-editorial text-[clamp(1.85rem,4.8vw,3.25rem)] text-white font-normal leading-snug tracking-wide">
+            <p className="font-editorial text-[clamp(2rem,5.2vw,3.5rem)] text-white font-semibold leading-snug tracking-wide text-shadow-subtle">
               The day we finally met.
             </p>
-            <p className="font-editorial italic text-[clamp(1.35rem,3.2vw,2.15rem)] text-rose-100/80">
+            <p className="font-editorial italic text-[clamp(1.4rem,3.4vw,2.25rem)] text-slate-100 font-medium text-shadow-subtle">
               And somehow...
             </p>
-            <div className="w-10 h-[1px] bg-rose-200/25 mx-auto" />
-            <p className="font-editorial text-[clamp(1.75rem,4.2vw,2.85rem)] text-white font-medium leading-snug tracking-wide starlight-heavy-glow">
+            <div className="w-10 h-[1px] bg-white/40 mx-auto" />
+            <p className="font-editorial text-[clamp(1.9rem,4.8vw,3.15rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
               It didn&apos;t feel like a first meeting.
             </p>
-            <p className="font-editorial italic text-[clamp(1.4rem,3.4vw,2.25rem)] text-rose-200 font-light">
+            <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.4rem)] text-cyan-200 font-semibold text-shadow-subtle">
               It felt familiar.
             </p>
           </div>
@@ -271,17 +271,17 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: justUsOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial text-[clamp(1.35rem,3.4vw,2.1rem)] text-white/85 leading-relaxed font-light">
+            <p className="font-editorial text-[clamp(1.45rem,3.8vw,2.3rem)] text-slate-100 leading-relaxed font-medium text-shadow-subtle">
               No pretending.
             </p>
-            <p className="font-editorial text-[clamp(1.35rem,3.4vw,2.1rem)] text-white/85 leading-relaxed font-light">
+            <p className="font-editorial text-[clamp(1.45rem,3.8vw,2.3rem)] text-slate-100 leading-relaxed font-medium text-shadow-subtle">
               No trying to impress each other.
             </p>
-            <p className="font-editorial text-[clamp(1.35rem,3.4vw,2.1rem)] text-white/85 leading-relaxed font-light">
+            <p className="font-editorial text-[clamp(1.45rem,3.8vw,2.3rem)] text-slate-100 leading-relaxed font-medium text-shadow-subtle">
               No holding back.
             </p>
-            <div className="w-12 h-[1px] bg-rose-200/30 my-2 mx-auto" />
-            <p className="font-editorial text-[clamp(2.2rem,6vw,4rem)] text-white font-medium tracking-wider starlight-heavy-glow">
+            <div className="w-12 h-[1px] bg-white/40 my-2 mx-auto" />
+            <p className="font-editorial text-[clamp(2.4rem,6.5vw,4.5rem)] text-white font-bold tracking-wider starlight-heavy-glow">
               Just us.
             </p>
           </div>
@@ -296,26 +296,26 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: dayBeatsOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-rose-200/60 font-medium mb-1">
+            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-slate-200 font-semibold mb-1 text-shadow-subtle">
               Unfiltered Rhythm
             </span>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-xl mx-auto text-white/90">
-              <span className="font-editorial italic text-[clamp(1.25rem,2.8vw,1.85rem)]">You cooked.</span>
-              <span className="text-rose-300/40">•</span>
-              <span className="font-editorial text-[clamp(1.25rem,2.8vw,1.85rem)] font-light">We stayed in.</span>
-              <span className="text-rose-300/40">•</span>
-              <span className="font-editorial italic text-[clamp(1.25rem,2.8vw,1.85rem)]">We watched shows.</span>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-xl mx-auto text-white font-medium text-shadow-subtle">
+              <span className="font-editorial italic text-[clamp(1.35rem,3.2vw,2.1rem)]">You cooked.</span>
+              <span className="text-white/50">•</span>
+              <span className="font-editorial text-[clamp(1.35rem,3.2vw,2.1rem)]">We stayed in.</span>
+              <span className="text-white/50">•</span>
+              <span className="font-editorial italic text-[clamp(1.35rem,3.2vw,2.1rem)]">We watched shows.</span>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-xl mx-auto text-white/90">
-              <span className="font-editorial text-[clamp(1.25rem,2.8vw,1.85rem)] font-light">We played.</span>
-              <span className="text-rose-300/40">•</span>
-              <span className="font-editorial italic text-[clamp(1.25rem,2.8vw,1.85rem)]">We laughed.</span>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-xl mx-auto text-white font-medium text-shadow-subtle">
+              <span className="font-editorial text-[clamp(1.35rem,3.2vw,2.1rem)]">We played.</span>
+              <span className="text-white/50">•</span>
+              <span className="font-editorial italic text-[clamp(1.35rem,3.2vw,2.1rem)]">We laughed.</span>
             </div>
 
             <div className="pt-2">
-              <p className="font-editorial text-[clamp(1.65rem,4.4vw,2.85rem)] text-white font-normal leading-snug tracking-wide starlight-heavy-glow">
+              <p className="font-editorial text-[clamp(1.85rem,5vw,3.25rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
                 We were completely ourselves.
               </p>
             </div>
@@ -331,18 +331,18 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: cookingOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full border border-rose-200/20 bg-rose-300/[0.05]">
-              <Flame className="w-3.5 h-3.5 text-rose-200" />
-              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-rose-100/80 font-medium">
+            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full border border-cyan-200/30 bg-cyan-200/[0.08] backdrop-blur-sm">
+              <Flame className="w-3.5 h-3.5 text-cyan-200" />
+              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-cyan-100 font-semibold text-shadow-subtle">
                 The Quiet Details
               </span>
             </div>
 
-            <h3 className="font-editorial italic text-[clamp(2.2rem,5.5vw,3.75rem)] text-white font-light tracking-wide">
+            <h3 className="font-editorial italic text-[clamp(2.35rem,6vw,4.25rem)] text-white font-semibold tracking-wide text-shadow-subtle">
               She cooked.
             </h3>
 
-            <p className="font-editorial text-[clamp(1.2rem,2.8vw,1.75rem)] text-rose-100/85 leading-relaxed max-w-md mx-auto">
+            <p className="font-editorial text-[clamp(1.3rem,3.2vw,2rem)] text-slate-100 leading-relaxed max-w-md mx-auto font-medium text-shadow-subtle">
               You were already making home look suspiciously natural.
             </p>
           </div>
@@ -358,29 +358,29 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: fiveYearsOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="flex items-center gap-2 text-rose-200/70 mb-1">
-              <Sparkles className="w-4 h-4 text-rose-200 animate-pulse" />
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em]">
+            <div className="flex items-center gap-2 text-cyan-200 mb-1">
+              <Sparkles className="w-4 h-4 text-cyan-200 animate-pulse" />
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold text-shadow-subtle">
                 The Core Truth
               </span>
-              <Sparkles className="w-4 h-4 text-rose-200 animate-pulse" />
+              <Sparkles className="w-4 h-4 text-cyan-200 animate-pulse" />
             </div>
 
             <h2
               id="together-five-years-statement"
-              className="font-editorial text-[clamp(2.15rem,6.2vw,4.5rem)] font-bold text-white leading-[1.2] tracking-wide sm:tracking-wider starlight-heavy-glow"
+              className="font-editorial text-[clamp(2.25rem,6.8vw,4.85rem)] font-bold text-white leading-[1.2] tracking-wide sm:tracking-wider starlight-heavy-glow"
               style={{
-                textShadow: '0 0 35px rgba(255, 220, 235, 0.7), 0 0 70px rgba(180, 80, 140, 0.35)',
+                textShadow: '0 0 35px rgba(255, 255, 255, 0.85), 0 0 70px rgba(56, 189, 248, 0.45)',
               }}
             >
               We felt like a couple that had already been together for five years.
             </h2>
 
             <div className="space-y-1 pt-1">
-              <p className="font-editorial italic text-[clamp(1.15rem,2.8vw,1.75rem)] text-rose-100/90 tracking-wide max-w-xl mx-auto">
+              <p className="font-editorial italic text-[clamp(1.25rem,3.2vw,2rem)] text-slate-100 font-medium tracking-wide max-w-xl mx-auto text-shadow-subtle">
                 Not because we&apos;d known each other for five years.
               </p>
-              <p className="font-editorial text-[clamp(1.25rem,3.2vw,1.95rem)] text-white font-medium tracking-wide max-w-xl mx-auto">
+              <p className="font-editorial text-[clamp(1.35rem,3.6vw,2.2rem)] text-white font-bold tracking-wide max-w-xl mx-auto starlight-heavy-glow">
                 But because being together felt that natural.
               </p>
             </div>
@@ -396,20 +396,20 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: playfulOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-rose-200/60">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
               Unspoken Chemistry
             </span>
 
-            <p className="font-editorial italic text-[clamp(1.6rem,4vw,2.5rem)] text-rose-100/80">
+            <p className="font-editorial italic text-[clamp(1.75rem,4.4vw,2.8rem)] text-slate-100 font-medium text-shadow-subtle">
               Apparently...
             </p>
 
-            <h3 className="font-editorial text-[clamp(1.85rem,4.8vw,3.25rem)] text-white font-normal leading-snug tracking-wide">
+            <h3 className="font-editorial text-[clamp(2rem,5.4vw,3.6rem)] text-white font-bold leading-snug tracking-wide text-shadow-subtle">
               we skipped the awkward first-date stage entirely.
             </h3>
 
-            <div className="px-5 py-1.5 rounded-full border border-rose-200/20 bg-rose-200/[0.04]">
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.2em] text-rose-200/90 font-medium">
+            <div className="px-5 py-1.5 rounded-full border border-white/30 bg-white/[0.08] backdrop-blur-sm">
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-100 font-semibold text-shadow-subtle">
                 Very efficient of us.
               </span>
             </div>
@@ -425,27 +425,24 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: questionOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-body text-xs sm:text-sm uppercase tracking-[0.28em] text-rose-200/70 font-medium">
-              The Turning Point
+            <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20">
+              THE TURNING POINT
             </span>
 
-            <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.35rem)] text-rose-100/85">
+            <p className="font-editorial italic text-[clamp(1.65rem,4.2vw,2.6rem)] text-[#e2e2e2] font-medium text-shadow-subtle">
               And then I asked you something.
             </p>
 
             <div className="relative py-2">
               <h2
                 id="will-you-be-my-girlfriend-title"
-                className="font-editorial text-[clamp(2.35rem,6.8vw,4.85rem)] font-bold text-white tracking-wide leading-tight starlight-heavy-glow"
-                style={{
-                  textShadow: '0 0 30px rgba(255, 230, 240, 0.8), 0 0 60px rgba(200, 100, 150, 0.4)',
-                }}
+                className="font-editorial text-[clamp(2.45rem,7.2vw,5.25rem)] font-bold text-white tracking-wide leading-tight starlight-heavy-glow"
               >
                 &ldquo;Will you be my girlfriend?&rdquo;
               </h2>
             </div>
 
-            <p className="font-body font-light text-xs sm:text-sm text-rose-100/60 uppercase tracking-[0.2em]">
+            <p className="font-mono-label text-[11px] text-[#d3c0e0] text-shadow-subtle">
               Intimate • Unforgettable • Real
             </p>
           </div>
@@ -460,21 +457,21 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: responseOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.6rem,4vw,2.5rem)] text-rose-100/80">
+            <p className="font-editorial italic text-[clamp(1.75rem,4.4vw,2.8rem)] text-[#e2e2e2] font-medium text-shadow-subtle">
               And just like that...
             </p>
 
-            <h2 className="font-editorial text-[clamp(2.4rem,6.5vw,4.6rem)] font-medium text-white tracking-wide starlight-heavy-glow">
+            <h2 className="font-editorial text-[clamp(2.6rem,7vw,5rem)] font-bold text-white tracking-wide starlight-heavy-glow">
               ...we became us.
             </h2>
 
             <div className="pt-2">
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-rose-200/30 bg-rose-400/[0.08] backdrop-blur-sm">
-                <Heart className="w-3.5 h-3.5 text-rose-200 fill-rose-200/40" />
-                <span className="font-body text-xs sm:text-sm uppercase tracking-[0.28em] text-white font-semibold">
+              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#ffafd7]/30 bg-[#ffafd7]/[0.08] backdrop-blur-md">
+                <Heart className="w-3.5 h-3.5 text-[#ffafd7] fill-[#ffafd7]/60" />
+                <span className="font-mono-label text-xs sm:text-sm text-white font-bold text-shadow-subtle">
                   18.02.2026
                 </span>
-                <Heart className="w-3.5 h-3.5 text-rose-200 fill-rose-200/40" />
+                <Heart className="w-3.5 h-3.5 text-[#ffafd7] fill-[#ffafd7]/60" />
               </div>
             </div>
           </div>
@@ -489,11 +486,11 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
               visibility: callbackOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-rose-200/60 font-medium">
+            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-slate-200 font-semibold text-shadow-subtle">
               Looking Back
             </span>
 
-            <p className="font-editorial italic text-[clamp(1.4rem,3.8vw,2.4rem)] text-rose-100/90 leading-relaxed max-w-2xl mx-auto">
+            <p className="font-editorial italic text-[clamp(1.5rem,4vw,2.6rem)] text-slate-100 leading-relaxed max-w-2xl mx-auto font-medium text-shadow-subtle">
               Looking back, I think this was the first time I understood why I would eventually call you Urijip.
             </p>
           </div>
@@ -510,24 +507,24 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
             }}
           >
             <div className="flex items-center gap-3 mb-1">
-              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-rose-200/40" />
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-rose-200 font-medium">
+              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
                 18 February 2026
               </span>
-              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-rose-200/40" />
+              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
             </div>
 
-            <div className="space-y-1.5 text-white/90">
-              <p className="font-editorial text-[clamp(1.35rem,3.2vw,2rem)] font-light">The day we met.</p>
-              <p className="font-editorial text-[clamp(1.35rem,3.2vw,2rem)] font-light">The day I asked you to be mine.</p>
-              <p className="font-editorial italic text-[clamp(1.35rem,3.2vw,2rem)] text-rose-100/80">The day I realized...</p>
+            <div className="space-y-1.5 text-white font-medium text-shadow-subtle">
+              <p className="font-editorial text-[clamp(1.45rem,3.6vw,2.2rem)]">The day we met.</p>
+              <p className="font-editorial text-[clamp(1.45rem,3.6vw,2.2rem)]">The day I asked you to be mine.</p>
+              <p className="font-editorial italic text-[clamp(1.45rem,3.6vw,2.2rem)] text-slate-200">The day I realized...</p>
             </div>
 
             <h3
               id="found-somewhere-call-home-title"
-              className="font-editorial text-[clamp(2.1rem,5.8vw,4.25rem)] font-medium text-white leading-snug tracking-wide starlight-heavy-glow max-w-2xl pt-1"
+              className="font-editorial text-[clamp(2.25rem,6.2vw,4.5rem)] font-bold text-white leading-snug tracking-wide starlight-heavy-glow max-w-2xl pt-1"
               style={{
-                textShadow: '0 0 35px rgba(255, 220, 235, 0.75), 0 0 70px rgba(180, 60, 120, 0.4)',
+                textShadow: '0 0 35px rgba(255, 255, 255, 0.85), 0 0 70px rgba(56, 189, 248, 0.5)',
               }}
             >
               I&apos;d found somewhere I could call home.
@@ -537,14 +534,14 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
             <motion.div
               animate={{
                 scale: [1, 1.12, 1],
-                opacity: [0.35, 0.65, 0.35],
+                opacity: [0.3, 0.55, 0.3],
               }}
               transition={{
                 duration: 7,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[radial-gradient(circle,_rgba(225,140,180,0.22)_0%,_transparent_70%)] blur-2xl pointer-events-none mt-2"
+              className="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.18)_0%,_rgba(56,189,248,0.1)_45%,_transparent_70%)] blur-2xl pointer-events-none mt-2"
             />
           </div>
 
@@ -563,15 +560,15 @@ export const FirstMeetingChapter: React.FC<FirstMeetingChapterProps> = ({
                   aria-label={step.label}
                   className={`transition-all duration-300 rounded-full flex-shrink-0 cursor-pointer ${
                     isActive
-                      ? 'w-6 h-1.5 bg-rose-200 shadow-[0_0_8px_rgba(255,200,225,0.9)]'
-                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-rose-200/50'
+                      ? 'w-6 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]'
+                      : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/70'
                   }`}
                 />
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-rose-100/40 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs text-slate-300 uppercase tracking-[0.2em] font-medium text-shadow-subtle">
             <span>{scrollProgress > 0.9 ? 'Chapter V Complete' : 'Scroll gently through 18 February'}</span>
           </div>
         </footer>

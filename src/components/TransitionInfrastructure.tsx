@@ -39,7 +39,7 @@ export const TransitionInfrastructure: React.FC<TransitionInfrastructureProps> =
         </div>
 
         {/* Transition Horizon Title */}
-        <h2 className="font-editorial text-[clamp(1.75rem,4.5vw,3rem)] font-light text-pink-100/90 leading-snug tracking-wide max-w-xl break-words px-4 starlight-heavy-glow">
+        <h2 className="font-editorial text-[clamp(1.75rem,4.5vw,3rem)] font-light text-slate-100 leading-snug tracking-wide max-w-xl break-words px-4 starlight-heavy-glow">
           Thank you for making it safe for me to be me.
         </h2>
 
@@ -54,12 +54,12 @@ export const TransitionInfrastructure: React.FC<TransitionInfrastructureProps> =
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[radial-gradient(circle,_rgba(250,200,225,0.18)_0%,_transparent_70%)] blur-2xl mt-4 pointer-events-none"
+          className="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[radial-gradient(circle,_rgba(56,189,248,0.15)_0%,_transparent_70%)] blur-2xl mt-4 pointer-events-none"
         />
 
         {/* Story Continues Note */}
-        <div className="mt-8 px-6 py-2.5 rounded-full border border-pink-200/15 bg-pink-300/[0.03] backdrop-blur-sm">
-          <p className="font-body text-[10px] sm:text-xs text-pink-200/50 tracking-widest uppercase">
+        <div className="mt-8 px-6 py-2.5 rounded-full border border-white/15 bg-white/[0.03] backdrop-blur-sm">
+          <p className="font-body text-[10px] sm:text-xs text-slate-400 tracking-widest uppercase">
             Chapter VIII Complete • The Safe Place
           </p>
         </div>

@@ -166,11 +166,11 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
         {/* Top Header / Constellation Chapter Marker */}
         <header className="w-full flex flex-col items-center flex-shrink-0 z-30 pt-2">
           <div className="flex items-center gap-3">
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/60 font-medium">
+            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
+            <span className="font-body text-[11px] sm:text-xs uppercase tracking-[0.3em] text-slate-200 font-semibold text-shadow-subtle">
               Chapter II • Starlight
             </span>
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
+            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
           </div>
         </header>
 
@@ -187,7 +187,7 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
               visibility: line1Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.75rem,4.5vw,3rem)] text-white/95 leading-snug tracking-wide text-shadow-subtle">
+            <p className="font-editorial italic text-[clamp(1.85rem,4.8vw,3.2rem)] text-white font-medium leading-snug tracking-wide text-shadow-subtle">
               You once told me...
             </p>
           </div>
@@ -202,7 +202,7 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
               visibility: line2Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial text-[clamp(2rem,5.2vw,3.65rem)] text-white font-medium leading-tight tracking-wide starlight-heavy-glow">
+            <p className="font-editorial text-[clamp(2.1rem,5.5vw,3.85rem)] text-white font-bold leading-tight tracking-wide starlight-heavy-glow">
               I light up your world.
             </p>
           </div>
@@ -217,7 +217,7 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
               visibility: line3Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.75rem,4.5vw,3rem)] text-white/90 leading-snug text-shadow-subtle">
+            <p className="font-editorial italic text-[clamp(1.85rem,4.8vw,3.2rem)] text-white font-medium leading-snug text-shadow-subtle">
               Maybe you were right.
             </p>
           </div>
@@ -232,7 +232,7 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
               visibility: line4Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.4rem,3.4vw,2.25rem)] text-white/75 tracking-wider">
+            <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.45rem)] text-slate-100 font-medium tracking-wider text-shadow-subtle">
               Because you called me...
             </p>
           </div>
@@ -258,7 +258,7 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
             >
               <h2
                 id="starlight-chapter-title"
-                className="font-editorial text-[clamp(2.5rem,8vw,5.5rem)] font-bold text-white uppercase tracking-[0.18em] sm:tracking-[0.24em] starlight-heavy-glow leading-none select-none"
+                className="font-editorial text-[clamp(2.6rem,8.5vw,5.75rem)] font-bold text-white uppercase tracking-[0.18em] sm:tracking-[0.24em] starlight-heavy-glow leading-none select-none"
               >
                 STARLIGHT
               </h2>
@@ -284,8 +284,8 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
                   visibility: keyLine1Opacity > 0.01 ? 'visible' : 'hidden',
                 }}
               >
-                <p className="font-editorial italic text-[clamp(1.2rem,3vw,2rem)] text-white/95 leading-snug">
-                  "You called me Starlight because I light up your world."
+                <p className="font-editorial italic text-[clamp(1.3rem,3.2vw,2.15rem)] text-white font-medium leading-snug text-shadow-subtle">
+                  &ldquo;You called me Starlight because I light up your world.&rdquo;
                 </p>
               </div>
 
@@ -298,7 +298,7 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
                   visibility: keyLine2Opacity > 0.01 ? 'visible' : 'hidden',
                 }}
               >
-                <p className="font-body font-light text-[clamp(0.95rem,2.2vw,1.3rem)] text-white/80 tracking-wide">
+                <p className="font-body font-medium text-[clamp(1rem,2.4vw,1.35rem)] text-slate-100 tracking-wide text-shadow-subtle">
                   And I think you were the first person who made me believe it.
                 </p>
               </div>
@@ -321,14 +321,14 @@ export const StarlightChapter: React.FC<StarlightChapterProps> = ({
                   className={`transition-all duration-300 rounded-full ${
                     isActive
                       ? 'w-6 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
-                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
+                      : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/70'
                   }`}
                 />
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs text-slate-300 uppercase tracking-[0.2em] font-medium text-shadow-subtle">
             <span>Scroll gently to progress</span>
           </div>
         </footer>

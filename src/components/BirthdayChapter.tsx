@@ -77,11 +77,11 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
 
   // -------------------------------------------------------------
   // ATMOSPHERIC ENVIRONMENTAL PROGRESSION
-  // Cosmic Return -> Warm Rose & Bubblegum Pink -> Warm Cream -> Deep Violet -> Midnight -> Black
+  // Cosmic Return -> Starlight Emerald/Teal Glow -> Warm Cream Hearth -> Deep Indigo Twilight -> Midnight -> Black
   // -------------------------------------------------------------
 
-  // Warm Rose & Bubblegum Glow (Peaks during the intimate birthday message and peaks of Home)
-  const warmRoseAlpha =
+  // Starlight & Aurora Glow (Peaks during the intimate birthday message and peaks of Home)
+  const auroraGlowAlpha =
     scrollProgress < 0.7
       ? range(scrollProgress, 0.0, 0.25, 0.35, 0.75)
       : range(scrollProgress, 0.7, 0.92, 0.75, 0.0);
@@ -102,7 +102,7 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
   const blackReturnAlpha = range(scrollProgress, 0.82, 0.98, 0, 1);
 
   // Faint Starlight Visibility Modulation
-  // Starlight is soft during pink/cream stages, then intensifies as darkness returns
+  // Starlight is soft during hearth stages, then intensifies as darkness returns
   const starlightGlowAlpha =
     scrollProgress < 0.7
       ? 0.35
@@ -171,13 +171,13 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
         {/* ATMOSPHERIC BACKGROUND LAYERS */}
         {/* ------------------------------------------------------------- */}
 
-        {/* Layer A: Warm Rose & Bubblegum Ambient Aura */}
+        {/* Layer A: Aurora Emerald & Teal Ambient Aura */}
         <div
           className="absolute inset-0 pointer-events-none transition-opacity duration-700 ease-out"
           style={{
-            opacity: warmRoseAlpha,
+            opacity: auroraGlowAlpha,
             background:
-              'radial-gradient(ellipse 95% 85% at 50% 45%, rgba(232, 128, 185, 0.22) 0%, rgba(125, 46, 104, 0.18) 40%, rgba(44, 22, 84, 0.08) 75%, transparent 100%)',
+              'radial-gradient(ellipse 95% 85% at 50% 45%, rgba(16, 185, 129, 0.15) 0%, rgba(14, 165, 233, 0.12) 40%, rgba(30, 27, 75, 0.2) 75%, transparent 100%)',
           }}
         />
 
@@ -187,17 +187,17 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
           style={{
             opacity: warmCreamAlpha,
             background:
-              'radial-gradient(circle, rgba(250, 245, 235, 0.18) 0%, rgba(244, 143, 177, 0.14) 45%, rgba(232, 128, 185, 0.05) 75%, transparent 100%)',
+              'radial-gradient(circle, rgba(250, 245, 235, 0.14) 0%, rgba(186, 230, 253, 0.08) 45%, rgba(16, 185, 129, 0.04) 75%, transparent 100%)',
           }}
         />
 
-        {/* Layer C: Deep Violet Twilight Atmosphere */}
+        {/* Layer C: Deep Violet & Indigo Twilight Atmosphere */}
         <div
           className="absolute inset-0 pointer-events-none transition-opacity duration-700 ease-out"
           style={{
             opacity: violetAlpha,
             background:
-              'radial-gradient(ellipse 90% 80% at 50% 50%, rgba(44, 22, 84, 0.75) 0%, rgba(20, 10, 42, 0.65) 55%, rgba(7, 11, 24, 0.9) 100%)',
+              'radial-gradient(ellipse 90% 80% at 50% 50%, rgba(30, 27, 75, 0.65) 0%, rgba(15, 23, 42, 0.75) 55%, rgba(4, 6, 10, 0.95) 100%)',
           }}
         />
 
@@ -217,11 +217,11 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
           style={{ opacity: starlightGlowAlpha }}
         >
           <div className="absolute top-[18%] left-[15%] w-1.5 h-1.5 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.9)] animate-pulse" />
-          <div className="absolute top-[28%] right-[22%] w-1 h-1 rounded-full bg-pink-100/60 shadow-[0_0_6px_rgba(255,220,240,0.8)]" />
+          <div className="absolute top-[28%] right-[22%] w-1 h-1 rounded-full bg-white/60 shadow-[0_0_6px_rgba(255,255,255,0.8)]" />
           <div className="absolute bottom-[32%] left-[24%] w-1 h-1 rounded-full bg-white/50 shadow-[0_0_6px_rgba(255,255,255,0.7)]" />
-          <div className="absolute top-[64%] right-[18%] w-1.5 h-1.5 rounded-full bg-pink-200/70 shadow-[0_0_8px_rgba(255,200,230,0.8)] animate-pulse" />
+          <div className="absolute top-[64%] right-[18%] w-1.5 h-1.5 rounded-full bg-cyan-100/70 shadow-[0_0_8px_rgba(200,245,255,0.8)] animate-pulse" />
           <div className="absolute top-[45%] left-[8%] w-1 h-1 rounded-full bg-white/40" />
-          <div className="absolute bottom-[20%] right-[30%] w-1 h-1 rounded-full bg-pink-100/50" />
+          <div className="absolute bottom-[20%] right-[30%] w-1 h-1 rounded-full bg-white/50" />
         </div>
 
         {/* ------------------------------------------------------------- */}
@@ -229,23 +229,15 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
         {/* ------------------------------------------------------------- */}
         <header className="w-full flex items-center justify-between z-30 flex-shrink-0">
           <div className="flex items-center gap-2 sm:gap-3">
-            <span className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-pink-300/10 border border-pink-200/20 text-pink-200/90 text-[10px] sm:text-xs font-editorial">
-              XI
+            <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20">
+              PHASE XI • HER BIRTHDAY
             </span>
-            <div className="flex flex-col">
-              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-pink-100/70 font-medium">
-                Phase Eleven
-              </span>
-              <span className="font-editorial text-xs sm:text-sm text-pink-100/90 italic tracking-wider">
-                Her Birthday
-              </span>
-            </div>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-pink-200/15 bg-pink-400/[0.04] backdrop-blur-md">
-            <Sparkles className="w-3 h-3 text-pink-200/80" />
-            <span className="font-body text-[9px] sm:text-[11px] uppercase tracking-[0.2em] text-pink-100/70">
-              For You
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-[#ffafd7]/20 bg-[#ffafd7]/[0.06] backdrop-blur-md">
+            <Sparkles className="w-3 h-3 text-[#ffafd7]" />
+            <span className="font-mono-label text-[9px] sm:text-[11px] text-[#ffafd7]">
+              FOR YOU
             </span>
           </div>
         </header>
@@ -270,7 +262,7 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="font-body text-xs sm:text-sm uppercase tracking-[0.3em] text-pink-200/80 mb-4 sm:mb-6 font-medium"
+              className="font-body text-xs sm:text-sm uppercase tracking-[0.3em] text-slate-300 mb-4 sm:mb-6 font-medium"
             >
               After everything we&apos;ve explored, I keep coming back to you.
             </motion.p>
@@ -280,7 +272,7 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
               className="font-editorial text-[clamp(2.2rem,6.5vw,4.8rem)] font-light text-white leading-[1.15] tracking-wide uppercase starlight-heavy-glow max-w-3xl"
               style={{
                 textShadow:
-                  '0 0 35px rgba(255, 240, 250, 0.95), 0 0 75px rgba(244, 143, 177, 0.55), 0 0 110px rgba(232, 128, 185, 0.35)',
+                  '0 0 35px rgba(255, 255, 255, 0.95), 0 0 75px rgba(186, 230, 253, 0.55), 0 0 110px rgba(56, 189, 248, 0.35)',
               }}
             >
               Happy Birthday, My Love.
@@ -296,7 +288,7 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-[radial-gradient(circle,_rgba(255,235,245,0.22)_0%,_rgba(244,143,177,0.12)_50%,_transparent_75%)] blur-2xl pointer-events-none mt-4"
+              className="w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.22)_0%,_rgba(56,189,248,0.12)_50%,_transparent_75%)] blur-2xl pointer-events-none mt-4"
             />
           </div>
 
@@ -313,17 +305,17 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
             }}
           >
             <div className="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
-              <p className="font-editorial text-[clamp(1.75rem,4.6vw,3.2rem)] font-light leading-relaxed text-pink-100">
+              <p className="font-editorial text-[clamp(1.75rem,4.6vw,3.2rem)] font-light leading-relaxed text-slate-100">
                 Your first birthday with a boyfriend.
               </p>
 
-              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-pink-200/40 to-transparent mx-auto my-3" />
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto my-3" />
 
               <p className="font-editorial italic text-[clamp(1.85rem,4.8vw,3.4rem)] font-normal leading-relaxed text-white starlight-text-glow">
                 And somehow, I get to be him.
               </p>
 
-              <p className="font-body text-[clamp(0.95rem,2.1vw,1.25rem)] font-normal text-pink-100/80 max-w-lg mx-auto pt-2 tracking-wide leading-relaxed">
+              <p className="font-body text-[clamp(0.95rem,2.1vw,1.25rem)] font-normal text-slate-300 max-w-lg mx-auto pt-2 tracking-wide leading-relaxed">
                 I&apos;m very happy that I get to be that person.
               </p>
             </div>
@@ -346,13 +338,13 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
                 Another year of you.
               </h2>
 
-              <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-pink-300/40 to-transparent mx-auto" />
+              <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-cyan-200/40 to-transparent mx-auto" />
 
-              <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.5rem)] font-light text-pink-100 leading-relaxed">
+              <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.5rem)] font-light text-slate-100 leading-relaxed">
                 And somehow, I still get to be part of the story.
               </p>
 
-              <p className="font-body text-[clamp(0.9rem,2vw,1.15rem)] font-normal text-pink-100/75 max-w-md mx-auto leading-relaxed pt-1">
+              <p className="font-body text-[clamp(0.9rem,2vw,1.15rem)] font-normal text-slate-300 max-w-md mx-auto leading-relaxed pt-1">
                 Every single day with you feels like a gift I never take for granted.
               </p>
             </div>
@@ -370,20 +362,20 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
               transform: `translateY(${stage3Y}px)`,
             }}
           >
-            <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto text-pink-100">
+            <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto text-slate-100">
               <p className="font-editorial text-[clamp(1.4rem,3.4vw,2.2rem)] font-light leading-relaxed text-white">
                 I am endlessly grateful for your existence.
               </p>
 
-              <p className="font-body text-[clamp(0.95rem,2.1vw,1.25rem)] font-normal text-pink-100/90 leading-relaxed max-w-xl mx-auto">
+              <p className="font-body text-[clamp(0.95rem,2.1vw,1.25rem)] font-normal text-slate-200 leading-relaxed max-w-xl mx-auto">
                 How much you mean to me is something words only ever begin to touch.
               </p>
 
-              <p className="font-editorial italic text-[clamp(1.3rem,3vw,2rem)] font-light text-pink-200/95 leading-relaxed max-w-xl mx-auto">
+              <p className="font-editorial italic text-[clamp(1.3rem,3vw,2rem)] font-light text-slate-200 leading-relaxed max-w-xl mx-auto">
                 I admire the woman you are, and the woman you are becoming every single day.
               </p>
 
-              <p className="font-body text-[clamp(0.9rem,1.9vw,1.15rem)] font-normal text-pink-100/75 leading-relaxed max-w-lg mx-auto pt-1">
+              <p className="font-body text-[clamp(0.9rem,1.9vw,1.15rem)] font-normal text-slate-300 leading-relaxed max-w-lg mx-auto pt-1">
                 I value everything we have created together, and I am so excited to witness more of your life.
               </p>
             </div>
@@ -406,13 +398,13 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
                 I hope this next chapter of your life brings you closer to everything you dream about.
               </p>
 
-              <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-pink-200/30 to-transparent mx-auto" />
+              <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto" />
 
-              <p className="font-editorial italic text-[clamp(1.45rem,3.6vw,2.4rem)] font-normal text-pink-100 leading-relaxed">
+              <p className="font-editorial italic text-[clamp(1.45rem,3.6vw,2.4rem)] font-normal text-slate-100 leading-relaxed">
                 I&apos;ll be here cheering for you.
               </p>
 
-              <p className="font-body text-[clamp(0.9rem,1.9vw,1.2rem)] font-normal text-pink-100/80 leading-relaxed max-w-lg mx-auto pt-1">
+              <p className="font-body text-[clamp(0.9rem,1.9vw,1.2rem)] font-normal text-slate-300 leading-relaxed max-w-lg mx-auto pt-1">
                 Especially when you decide to turn that cooking passion into something bigger.
               </p>
             </div>
@@ -436,13 +428,13 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
                 className="font-editorial text-[clamp(2.4rem,7vw,5rem)] font-bold text-white leading-tight tracking-wide starlight-heavy-glow"
                 style={{
                   textShadow:
-                    '0 0 40px rgba(255, 240, 250, 0.95), 0 0 85px rgba(244, 143, 177, 0.65), 0 0 125px rgba(232, 128, 185, 0.4)',
+                    '0 0 40px rgba(255, 255, 255, 0.95), 0 0 85px rgba(186, 230, 253, 0.65), 0 0 125px rgba(56, 189, 248, 0.4)',
                 }}
               >
                 Happy Birthday, Urijip.
               </h2>
 
-              <p className="font-editorial italic text-[clamp(1.6rem,4.2vw,3rem)] font-light text-pink-100 leading-relaxed starlight-text-glow">
+              <p className="font-editorial italic text-[clamp(1.6rem,4.2vw,3rem)] font-light text-slate-100 leading-relaxed starlight-text-glow">
                 Thank you for being home.
               </p>
 
@@ -457,7 +449,7 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="w-52 h-52 sm:w-72 sm:h-72 rounded-full bg-[radial-gradient(circle,_rgba(255,245,240,0.25)_0%,_rgba(244,143,177,0.15)_45%,_transparent_75%)] blur-2xl pointer-events-none mx-auto mt-2"
+                className="w-52 h-52 sm:w-72 sm:h-72 rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.25)_0%,_rgba(56,189,248,0.15)_45%,_transparent_75%)] blur-2xl pointer-events-none mx-auto mt-2"
               />
             </div>
           </div>
@@ -475,18 +467,18 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
             }}
           >
             <div className="space-y-6 sm:space-y-8 max-w-xl mx-auto">
-              <p className="font-editorial text-[clamp(1.85rem,5vw,3.4rem)] font-light text-pink-100/90 leading-relaxed tracking-wide starlight-text-glow">
+              <p className="font-editorial text-[clamp(1.85rem,5vw,3.4rem)] font-light text-slate-100 leading-relaxed tracking-wide starlight-text-glow">
                 The story isn&apos;t over.
               </p>
 
-              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-purple-300/40 to-transparent mx-auto" />
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent mx-auto" />
 
               <p className="font-editorial italic text-[clamp(1.6rem,4.2vw,2.8rem)] font-light text-white/95 leading-relaxed">
                 This is only the first phase.
               </p>
 
-              <p className="font-body text-xs sm:text-sm uppercase tracking-[0.3em] text-purple-200/50 pt-3">
-                Rose → Violet → Midnight
+              <p className="font-body text-xs sm:text-sm uppercase tracking-[0.3em] text-slate-400 pt-3">
+                Aurora → Starlight → Midnight
               </p>
             </div>
           </div>
@@ -535,15 +527,15 @@ export const BirthdayChapter: React.FC<BirthdayChapterProps> = ({
                   aria-label={step.label}
                   className={`transition-all duration-300 rounded-full flex-shrink-0 cursor-pointer ${
                     isActive
-                      ? 'w-6 h-1.5 bg-pink-200 shadow-[0_0_8px_rgba(255,220,240,0.9)]'
-                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-pink-200/50'
+                      ? 'w-6 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]'
+                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
                   }`}
                 />
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-pink-100/40 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-slate-400 uppercase tracking-[0.2em]">
             <span>
               {scrollProgress > 0.92
                 ? 'Phase XI Complete • Deep Night'

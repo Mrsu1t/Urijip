@@ -3,63 +3,112 @@
  * Established in Phase 1 to guide the visual foundation and future evolutionary chapters.
  */
 
+/**
+ * URIJIP - Centralized Design Tokens & Theme System
+ * Starlight Cinematic Design System
+ */
+
 export const COLOR_TOKENS = {
-  // Phase 1 - Night Sky Opening
-  night: {
-    base: '#04060A',
-    void: '#070B12',
-    deepCharcoal: '#0E141D',
-    softCharcoal: '#151C28',
-    midnightAura: '#0A1322',
+  // Starlight Cinematic Surface Spectrum
+  surface: '#121414',
+  surfaceDim: '#121414',
+  surfaceBright: '#37393a',
+  surfaceContainerLowest: '#0c0f0f',
+  surfaceContainerLow: '#1a1c1c',
+  surfaceContainer: '#1e2020',
+  surfaceContainerHigh: '#282a2b',
+  surfaceContainerHighest: '#333535',
+  onSurface: '#e2e2e2',
+  onSurfaceVariant: '#d8c0c9',
+  
+  // Accents & Atmosphere
+  primary: '#ffafd7', // Nebula Pink (#D46CA6 / #FFAFD7)
+  onPrimary: '#5f0643',
+  primaryContainer: '#d66da8',
+  nebulaPink: '#D46CA6',
+  
+  secondary: '#d3c0e0', // Muted Violet / Lavender Starlight
+  onSecondary: '#382b45',
+  secondaryContainer: '#4f415c',
+  
+  tertiary: '#c8c5ce',
+  onTertiary: '#303037',
+  
+  outline: '#a08b94',
+  outlineVariant: '#53424a',
+  surfaceTint: '#ffafd7',
+  
+  // Deep Space Foundations
+  space: {
+    black: '#000000',
+    deepInk: '#05050A',
+    mutedViolet: '#1C1028',
+    nebulaGlow: 'rgba(212, 108, 166, 0.15)',
   },
+
+  // Starlight Radiance Tones
   starlight: {
     pure: '#FFFFFF',
     soft: '#EAEFF8',
     muted: '#B0BDD4',
     faint: 'rgba(234, 239, 248, 0.45)',
-    glow: 'rgba(220, 235, 255, 0.65)',
-    accentGlow: 'rgba(180, 215, 255, 0.35)',
-    goldTint: 'rgba(255, 248, 220, 0.85)',
-  },
-  // Future Chapters Evolution Tokens (Reserved for upcoming phases: BLACK → MIDNIGHT → VIOLET → ROSE → BUBBLEGUM PINK → WARM CREAM)
-  evolution: {
-    black: '#04060A',
-    midnight: '#0A1128',
-    violet: '#2C1654',
-    rose: '#7D2E68',
-    bubblegumPink: '#E880B9',
-    warmCream: '#FAF5EB',
+    glow: 'rgba(255, 175, 215, 0.75)',
+    accentGlow: 'rgba(211, 192, 224, 0.55)',
+    nebulaTint: 'rgba(212, 108, 166, 0.4)',
   },
 } as const;
 
 export const TYPOGRAPHY_TOKENS = {
   fonts: {
-    editorial: "'Cormorant Garamond', Georgia, serif",
-    body: "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+    display: "'Hanken Grotesk', system-ui, sans-serif",
+    headline: "'Hanken Grotesk', system-ui, sans-serif",
+    body: "'Manrope', system-ui, sans-serif",
+    mono: "'JetBrains Mono', monospace",
+    editorial: "'Cormorant Garamond', 'Noto Serif KR', Georgia, serif",
   },
   scales: {
     // Fluid responsive typography rules
-    heroTitle: 'clamp(2.25rem, 6vw, 4.25rem)',
+    displayLg: 'clamp(2.75rem, 8.5vw, 5.5rem)',
+    headlineLg: 'clamp(2rem, 5.5vw, 3.75rem)',
     sequenceLine: 'clamp(1.25rem, 3.2vw, 2.25rem)',
     sequenceFinalLine: 'clamp(1.75rem, 4.8vw, 3.5rem)',
-    starlightDisplay: 'clamp(2.75rem, 8.5vw, 6rem)',
-    subhead: 'clamp(0.95rem, 1.8vw, 1.25rem)',
-    caption: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+    bodyMd: 'clamp(1rem, 2vw, 1.15rem)',
+    labelSm: 'clamp(0.75rem, 1.2vw, 0.875rem)',
     scrollPrompt: 'clamp(0.75rem, 1.4vw, 0.875rem)',
   },
   lineHeights: {
-    tight: 1.15,
-    snug: 1.35,
-    normal: 1.6,
-    relaxed: 1.8,
+    display: 1.1,
+    headline: 1.2,
+    body: 1.6,
+    label: 1.4,
   },
   letterSpacing: {
-    tighter: '-0.03em',
-    tight: '-0.015em',
-    normal: '0em',
+    display: '0.1em',
+    headline: '0.05em',
+    body: '0.01em',
+    label: '0.2em',
     wide: '0.08em',
     widest: '0.22em',
   },
+} as const;
+
+export const SHAPE_TOKENS = {
+  rounded: {
+    sm: '0.125rem', // 2px
+    DEFAULT: '0.25rem', // 4px standard
+    md: '0.375rem', // 6px
+    lg: '0.5rem', // 8px
+    xl: '0.75rem', // 12px (modals/cards)
+    full: '9999px',
+  },
+} as const;
+
+export const SPACING_TOKENS = {
+  unit: 8,
+  containerMax: '1200px',
+  gutter: '24px',
+  marginMobile: '20px',
+  marginDesktop: '64px',
 } as const;
 
 export const ANIMATION_TOKENS = {

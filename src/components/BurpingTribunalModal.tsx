@@ -38,24 +38,24 @@ export const BurpingTribunalModal: React.FC<BurpingTribunalModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 8 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-lg rounded-2xl bg-[#090D16]/95 border border-white/15 p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden text-left"
+            className="relative w-full max-w-lg rounded-xl bg-[#1a1c1c]/95 border border-white/15 p-6 sm:p-8 shadow-[0_0_50px_rgba(0,0,0,0.9)] overflow-hidden text-left"
           >
             {/* Header Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#ffafd7]/40 to-transparent" />
 
             {/* Top Close Button */}
             <button
               type="button"
               onClick={onClose}
               aria-label="Close Tribunal Report"
-              className="absolute top-4 right-4 p-2 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              className="absolute top-4 right-4 p-2 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffafd7]"
             >
               <X className="w-4 h-4" />
             </button>
 
             {/* Header / Case Reference */}
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-body text-[10px] uppercase tracking-[0.25em] text-white/50 font-medium">
+              <span className="font-mono-label text-[10px] text-[#ffafd7]">
                 Official Tribunal Record • #21-11-2025
               </span>
             </div>
@@ -67,38 +67,38 @@ export const BurpingTribunalModal: React.FC<BurpingTribunalModalProps> = ({
               The Acoustic Evidence
             </h3>
 
-            <p className="font-body text-xs text-white/60 mb-5 italic">
+            <p className="font-body text-xs text-[#e2e2e2]/70 mb-5 italic">
               Disputed late-night vocal resonance showdown.
             </p>
 
             {/* Structured Evidence Block */}
             <div className="space-y-3.5 mb-6">
-              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3">
-                <Award className="w-5 h-5 text-amber-200/90 mt-0.5 flex-shrink-0" />
+              <div className="p-3.5 rounded-lg bg-white/[0.03] border border-white/10 flex items-start gap-3">
+                <Award className="w-5 h-5 text-[#ffafd7] mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="font-body text-xs font-semibold text-white tracking-wide block mb-0.5">
                     Official Ruling: He Won
                   </span>
-                  <p className="font-body text-xs text-white/70 leading-relaxed">
+                  <p className="font-body text-xs text-[#e2e2e2]/80 leading-relaxed">
                     By metrics of sheer volume, acoustic confidence, and unmatched audacity at 1:40 AM.
                   </p>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-blue-200/80 mt-0.5 flex-shrink-0" />
+              <div className="p-3.5 rounded-lg bg-white/[0.03] border border-white/10 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-[#d3c0e0] mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="font-body text-xs font-semibold text-white tracking-wide block mb-0.5">
                     Defendant&apos;s Legal Appeal
                   </span>
-                  <p className="font-body text-xs text-white/70 leading-relaxed">
+                  <p className="font-body text-xs text-[#e2e2e2]/80 leading-relaxed">
                     Her legal team has formally disputed the verdict, claiming unauthorized decibel boosting and demanding an immediate retrial.
                   </p>
                 </div>
               </div>
 
-              <div className="px-3.5 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 text-center">
-                <p className="font-editorial italic text-sm text-white/80">
+              <div className="px-3.5 py-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-center">
+                <p className="font-editorial italic text-sm text-[#ffafd7]">
                   &ldquo;Case closed. Verdict remains permanently recorded in history.&rdquo;
                 </p>
               </div>
@@ -109,7 +109,7 @@ export const BurpingTribunalModal: React.FC<BurpingTribunalModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white text-[#04060A] font-body text-xs font-semibold uppercase tracking-[0.2em] hover:bg-white/90 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-[4px] bg-[#282a2b] hover:bg-[#333535] border border-white/15 text-[#ffafd7] font-mono-label text-xs tracking-[0.2em] active:scale-95 transition-all shadow-[0_0_20px_rgba(212,108,166,0.2)]"
               >
                 Case Closed
               </button>

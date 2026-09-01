@@ -23,10 +23,10 @@ export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({
       className={`w-full max-w-4xl mx-auto text-center px-4 sm:px-6 md:px-8 transition-all ${className}`}
     >
       <p
-        className={`font-editorial transition-colors duration-700 leading-snug sm:leading-normal break-words ${
+        className={`font-editorial transition-colors duration-700 leading-snug sm:leading-normal break-words text-shadow-subtle ${
           isEmphasized
-            ? 'text-[clamp(1.85rem,5.5vw,3.75rem)] font-light text-white tracking-wide starlight-text-glow mt-4 sm:mt-6 md:mt-8'
-            : 'text-[clamp(1.2rem,3.2vw,2.2rem)] font-light text-[#D2DCEE]/90 tracking-normal'
+            ? 'text-[clamp(1.95rem,5.8vw,3.95rem)] font-bold text-white tracking-wide starlight-heavy-glow mt-4 sm:mt-6 md:mt-8'
+            : 'text-[clamp(1.3rem,3.4vw,2.35rem)] font-medium text-white tracking-normal'
         }`}
         style={{
           // Ensure zero truncation, guaranteed complete multi-line wrapping and optimal line rhythm

@@ -25,7 +25,7 @@ export const VoiceSoundWave: React.FC<VoiceSoundWaveProps> = ({
     >
       {/* Central Voice Origin Aura */}
       <div
-        className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-[radial-gradient(circle,_rgba(210,230,255,0.18)_0%,_rgba(140,185,240,0.06)_45%,_transparent_75%)] blur-lg transition-all duration-700"
+        className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-[radial-gradient(circle,_rgba(255,175,215,0.2)_0%,_rgba(211,192,224,0.08)_45%,_transparent_75%)] blur-lg transition-all duration-700"
         style={{
           opacity: baseOpacity * (isPlaying ? 1.4 : isFocused ? 1.2 : 0.8),
           transform: `scale(${0.9 + baseOpacity * (isPlaying ? 0.4 : 0.25)})`,
@@ -34,7 +34,7 @@ export const VoiceSoundWave: React.FC<VoiceSoundWaveProps> = ({
 
       {/* Origin Star / Sound Point */}
       <div
-        className="absolute w-2 h-2 rounded-full bg-white transition-all duration-500 shadow-[0_0_12px_2px_rgba(255,255,255,0.9)]"
+        className="absolute w-2 h-2 rounded-full bg-white transition-all duration-500 shadow-[0_0_12px_2px_rgba(255,175,215,0.9)]"
         style={{
           opacity: Math.min(1, baseOpacity * 1.3),
           transform: `scale(${0.8 + baseOpacity * (isPlaying ? 0.6 : 0.4)})`,
@@ -54,9 +54,9 @@ export const VoiceSoundWave: React.FC<VoiceSoundWaveProps> = ({
               height: [24, 100 + ringIdx * 45, 170 + ringIdx * 50],
               opacity: [0, (isPlaying ? 0.6 : 0.45) * baseOpacity, 0],
               borderColor: [
-                'rgba(255, 255, 255, 0.6)',
-                'rgba(180, 215, 255, 0.3)',
-                'rgba(140, 180, 240, 0)',
+                'rgba(255, 255, 255, 0.7)',
+                'rgba(255, 175, 215, 0.4)',
+                'rgba(211, 192, 224, 0)',
               ],
             }}
             transition={{
@@ -66,7 +66,7 @@ export const VoiceSoundWave: React.FC<VoiceSoundWaveProps> = ({
               ease: 'easeOut',
             }}
             style={{
-              boxShadow: '0 0 15px 0px rgba(180, 220, 255, 0.08)',
+              boxShadow: '0 0 15px 0px rgba(212, 108, 166, 0.12)',
             }}
           />
         );
@@ -81,16 +81,16 @@ export const VoiceSoundWave: React.FC<VoiceSoundWaveProps> = ({
         <defs>
           <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="25%" stopColor="#d0e2ff" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#ffffff" stopOpacity="0.8" />
-            <stop offset="75%" stopColor="#d0e2ff" stopOpacity="0.3" />
+            <stop offset="25%" stopColor="#d3c0e0" stopOpacity="0.35" />
+            <stop offset="50%" stopColor="#ffafd7" stopOpacity="0.85" />
+            <stop offset="75%" stopColor="#d3c0e0" stopOpacity="0.35" />
             <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="waveGradientSecondary" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="35%" stopColor="#8cb9f0" stopOpacity="0.15" />
-            <stop offset="50%" stopColor="#c5dcff" stopOpacity="0.45" />
-            <stop offset="65%" stopColor="#8cb9f0" stopOpacity="0.15" />
+            <stop offset="35%" stopColor="#d46ca6" stopOpacity="0.2" />
+            <stop offset="50%" stopColor="#ffafd7" stopOpacity="0.5" />
+            <stop offset="65%" stopColor="#d46ca6" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
           </linearGradient>
         </defs>

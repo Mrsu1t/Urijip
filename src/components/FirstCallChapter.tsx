@@ -10,10 +10,9 @@ import { Sparkles, ShieldAlert, Award } from 'lucide-react';
 
 /**
  * ORCHESTRAL SOUNDTRACK INTEGRATION POINT
- * Set this to the real audio file URL (e.g., '/assets/midnight_orchestra.mp3') when ready.
- * When null or empty, the chapter operates gracefully using safe placeholder state.
+ * Real audio file URL for Chapter IV (The First Call • 20 → 21 November 2025).
  */
-export const FIRST_CALL_ORCHESTRA_AUDIO_SRC: string | null = null;
+export const FIRST_CALL_ORCHESTRA_AUDIO_SRC = 'https://www.image2url.com/r2/default/audio/1788294198647-95511561-adad-4cb9-93f3-ee9ecd90ba9a.ogg';
 
 export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
   onProgressChange,
@@ -65,9 +64,9 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
     };
   }, [onProgressChange]);
 
-  // Pause audio automatically if user scrolls far away from the music section
+  // Pause audio automatically if user leaves Chapter IV entirely
   useEffect(() => {
-    if (audio.isPlaying && (scrollProgress < 0.45 || scrollProgress > 0.96)) {
+    if (audio.isPlaying && (scrollProgress < 0.005 || scrollProgress > 0.995)) {
       audio.pause();
     }
   }, [scrollProgress, audio]);
@@ -191,15 +190,31 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
       {/* Sticky Viewport Stage (100svh) */}
       <div className="sticky top-0 h-[100svh] w-full flex flex-col items-center justify-between px-4 sm:px-8 md:px-12 py-5 sm:py-8 overflow-hidden select-none">
         
-        {/* Top Header / Constellation Chapter IV Marker */}
-        <header className="w-full flex flex-col items-center flex-shrink-0 z-30 pt-2">
-          <div className="flex items-center gap-3">
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/60 font-medium">
+        {/* Top Header / Constellation Chapter IV Marker with Audio Indicator */}
+        <header className="w-full flex items-center justify-between flex-shrink-0 z-30 pt-1 sm:pt-2">
+          <div className="flex items-center gap-2">
+            <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20 text-[10px] sm:text-xs">
+              20 → 21 NOV 2025
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-4 sm:w-10 h-[1px] bg-gradient-to-r from-transparent to-[#ffafd7]/40" />
+            <span className="font-mono-label text-[10px] sm:text-xs text-[#e2e2e2] tracking-[0.2em] sm:tracking-[0.3em] font-semibold text-shadow-subtle">
               Chapter IV • The First Call
             </span>
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
+            <div className="w-4 sm:w-10 h-[1px] bg-gradient-to-l from-transparent to-[#ffafd7]/40" />
           </div>
+
+          <button
+            type="button"
+            onClick={audio.togglePlay}
+            aria-label={audio.isPlaying ? "Pause chapter song" : "Play chapter song"}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border border-[#ffafd7]/25 bg-[#ffafd7]/[0.08] hover:bg-[#ffafd7]/[0.16] text-[10px] sm:text-xs font-mono-label text-[#ffafd7] backdrop-blur-md transition-all duration-300 cursor-pointer"
+          >
+            <span className={`inline-block w-1.5 h-1.5 rounded-full ${audio.isPlaying ? 'bg-[#ffafd7] animate-ping' : 'bg-[#ffafd7]/60'}`} />
+            <span>{audio.isPlaying ? 'PLAYING' : 'SONG'}</span>
+          </button>
         </header>
 
         {/* Center Stage: Sequential Memory Fragments & Climax */}
@@ -208,27 +223,40 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
           {/* 1. Chapter Entry: 20 → 21 NOVEMBER 2025 & "THE FIRST CALL" */}
           <div
             id="first-call-title-card"
-            className="absolute text-center max-w-2xl px-4 transition-all duration-100 ease-out z-30 pointer-events-none"
+            className="absolute text-center max-w-2xl px-4 flex flex-col items-center justify-center transition-all duration-100 ease-out z-30"
             style={{
               opacity: titleOpacity,
               transform: `translateY(${titleY}px)`,
               visibility: titleOpacity > 0.005 ? 'visible' : 'hidden',
+              pointerEvents: titleOpacity > 0.35 ? 'auto' : 'none',
             }}
           >
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50 font-medium">
-                20 → 21 November 2025
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20">
+                20 → 21 NOVEMBER 2025
               </span>
             </div>
             <h2
               id="the-first-call-hero-title"
-              className="font-editorial text-[clamp(2.5rem,8vw,5.5rem)] font-bold text-white uppercase tracking-[0.16em] sm:tracking-[0.22em] starlight-heavy-glow leading-none select-none mb-4"
+              className="font-editorial text-[clamp(2.6rem,8.5vw,5.75rem)] font-bold text-white uppercase tracking-[0.16em] sm:tracking-[0.22em] starlight-heavy-glow leading-none select-none mb-3"
             >
               THE FIRST CALL
             </h2>
-            <p className="font-editorial italic text-[clamp(1.1rem,2.8vw,1.65rem)] text-white/75 tracking-wide max-w-md mx-auto">
+            <p className="font-editorial italic text-[clamp(1.2rem,3vw,1.85rem)] text-[#e2e2e2] font-medium tracking-wide max-w-md mx-auto text-shadow-subtle mb-4">
               One conversation became a night.
             </p>
+
+            {/* Song Audio Controller at Beginning of Chapter 4 */}
+            <ChapterAudioController
+              isPlaying={audio.isPlaying}
+              progress={audio.progress}
+              currentTime={audio.currentTime}
+              duration={audio.duration}
+              onTogglePlay={audio.togglePlay}
+              label="PLAY CHAPTER IV SONG"
+              subtext="Midnight Orchestra • The First Call"
+              className="mt-1"
+            />
           </div>
 
           {/* 2. Fragment 1: "Our first call..." / "...was supposed to be a conversation." */}
@@ -241,14 +269,14 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               visibility: callFrag1Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
               Late November Night
             </span>
-            <p className="font-editorial text-[clamp(1.85rem,4.8vw,3.25rem)] text-white font-normal leading-snug tracking-wide text-shadow-subtle">
+            <p className="font-editorial text-[clamp(2rem,5.2vw,3.5rem)] text-white font-semibold leading-snug tracking-wide text-shadow-subtle">
               Our first call...
             </p>
-            <div className="w-10 h-[1px] bg-white/20 mx-auto" />
-            <p className="font-editorial italic text-[clamp(1.2rem,2.8vw,1.85rem)] text-white/80 leading-snug">
+            <div className="w-10 h-[1px] bg-white/40 mx-auto" />
+            <p className="font-editorial italic text-[clamp(1.3rem,3.2vw,2.1rem)] text-slate-100 font-medium leading-snug text-shadow-subtle">
               ...was supposed to be a conversation.
             </p>
           </div>
@@ -263,13 +291,13 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               visibility: callFrag2Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
               Hour after hour
             </span>
-            <p className="font-editorial italic text-[clamp(1.75rem,4.2vw,2.75rem)] text-white/90 leading-snug">
+            <p className="font-editorial italic text-[clamp(1.85rem,4.8vw,3.2rem)] text-white font-medium leading-snug text-shadow-subtle">
               But somehow...
             </p>
-            <p className="font-editorial text-[clamp(1.95rem,5.2vw,3.5rem)] text-white font-medium leading-snug tracking-wide starlight-heavy-glow">
+            <p className="font-editorial text-[clamp(2.1rem,5.5vw,3.85rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
               we talked into the next day.
             </p>
           </div>
@@ -290,7 +318,7 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               isMidnight={clockProgress >= 0.95}
               className="mb-4"
             />
-            <p className="font-editorial italic text-[clamp(1.15rem,2.8vw,1.6rem)] text-white/80 tracking-wide">
+            <p className="font-editorial italic text-[clamp(1.25rem,3vw,1.8rem)] text-slate-100 font-medium tracking-wide text-shadow-subtle">
               Minutes turned into hours across the quiet night.
             </p>
           </div>
@@ -305,17 +333,17 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               visibility: midnightOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="px-4 py-1.5 rounded-full border border-white/20 bg-white/[0.04] backdrop-blur-sm mb-1">
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-white/90 font-medium">
+            <div className="px-4 py-1.5 rounded-full border border-white/30 bg-white/[0.08] backdrop-blur-sm mb-1">
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-white font-semibold text-shadow-subtle">
                 12:00 AM • 21 November
               </span>
             </div>
             
-            <p className="font-editorial text-[clamp(2.1rem,5.5vw,3.75rem)] text-white font-light leading-snug tracking-wide starlight-heavy-glow">
+            <p className="font-editorial text-[clamp(2.2rem,6vw,4rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
               And then it became my birthday.
             </p>
 
-            <p className="font-body font-light text-[clamp(0.95rem,2.2vw,1.25rem)] text-white/70 italic">
+            <p className="font-body font-medium text-[clamp(1.05rem,2.4vw,1.35rem)] text-slate-100 italic text-shadow-subtle">
               One night became something I&apos;ll never forget.
             </p>
           </div>
@@ -331,25 +359,25 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               visibility: birthdayHeroOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="flex items-center gap-2 text-white/60 mb-1">
-              <Sparkles className="w-4 h-4 text-amber-100/80 animate-pulse" />
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em]">
+            <div className="flex items-center gap-2 text-slate-200 mb-1">
+              <Sparkles className="w-4 h-4 text-cyan-200 animate-pulse" />
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold text-shadow-subtle">
                 The First Voice
               </span>
-              <Sparkles className="w-4 h-4 text-amber-100/80 animate-pulse" />
+              <Sparkles className="w-4 h-4 text-cyan-200 animate-pulse" />
             </div>
 
             <h2
               id="first-person-wished-title"
-              className="font-editorial text-[clamp(2.25rem,6.8vw,4.75rem)] font-bold text-white leading-[1.2] tracking-wide sm:tracking-wider starlight-heavy-glow"
+              className="font-editorial text-[clamp(2.35rem,7vw,5rem)] font-bold text-white leading-[1.2] tracking-wide sm:tracking-wider starlight-heavy-glow"
               style={{
-                textShadow: '0 0 35px rgba(255, 255, 255, 0.75), 0 0 70px rgba(180, 215, 255, 0.35)',
+                textShadow: '0 0 35px rgba(255, 255, 255, 0.85), 0 0 70px rgba(56, 189, 248, 0.45)',
               }}
             >
               You were the first person to wish me a Happy Birthday.
             </h2>
 
-            <p className="font-editorial italic text-[clamp(1.15rem,2.8vw,1.75rem)] text-white/85 tracking-wide max-w-xl mx-auto">
+            <p className="font-editorial italic text-[clamp(1.25rem,3.2vw,2rem)] text-slate-100 font-medium tracking-wide max-w-xl mx-auto text-shadow-subtle">
               Before anyone else in the world.
             </p>
           </div>
@@ -365,31 +393,31 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               pointerEvents: sangOpacity > 0.4 ? 'auto' : 'none',
             }}
           >
-            <span className="font-body text-xs uppercase tracking-[0.3em] text-white/50">
+            <span className="font-body text-xs uppercase tracking-[0.3em] text-slate-200 font-semibold text-shadow-subtle">
               Midnight Melody
             </span>
 
-            <h3 className="font-editorial italic text-[clamp(2.2rem,6vw,4rem)] text-white font-normal leading-snug tracking-wide text-shadow-subtle">
+            <h3 className="font-editorial italic text-[clamp(2.3rem,6.5vw,4.25rem)] text-white font-bold leading-snug tracking-wide text-shadow-subtle">
               &ldquo;Happy Birthday.&rdquo;
             </h3>
 
-            <p className="font-editorial text-[clamp(1.4rem,3.8vw,2.5rem)] text-white/90 font-light leading-snug tracking-wide starlight-heavy-glow">
+            <p className="font-editorial text-[clamp(1.5rem,4.2vw,2.75rem)] text-white font-semibold leading-snug tracking-wide starlight-heavy-glow">
               You even sang to me.
             </p>
 
-            <p className="font-body font-light text-[clamp(0.95rem,2.2vw,1.2rem)] text-white/70 max-w-md mx-auto mb-2">
+            <p className="font-body font-medium text-[clamp(1.05rem,2.4vw,1.35rem)] text-slate-100 max-w-md mx-auto mb-2 text-shadow-subtle">
               In that moment, everything between us felt profoundly real.
             </p>
 
-            {/* Classical Orchestra Soundtrack Controller Placeholder */}
+            {/* Classical Orchestra Soundtrack Controller */}
             <ChapterAudioController
               isPlaying={audio.isPlaying}
               progress={audio.progress}
               currentTime={audio.currentTime}
               duration={audio.duration}
               onTogglePlay={audio.togglePlay}
-              label="ORCHESTRA"
-              subtext="Intimate orchestral score • Midnight Memory"
+              label="PLAY MIDNIGHT SONG"
+              subtext="Midnight Orchestra • The First Call"
               className="mt-2"
             />
           </div>
@@ -405,42 +433,39 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               pointerEvents: burpingOpacity > 0.4 ? 'auto' : 'none',
             }}
           >
-            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full border border-amber-200/20 bg-amber-200/[0.04]">
-              <ShieldAlert className="w-3.5 h-3.5 text-amber-200/80" />
-              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-amber-100/70 font-medium">
+            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full border border-cyan-200/30 bg-cyan-200/[0.08]">
+              <ShieldAlert className="w-3.5 h-3.5 text-cyan-200" />
+              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-cyan-100 font-semibold text-shadow-subtle">
                 Unscripted Interlude
               </span>
             </div>
 
-            <p className="font-editorial italic text-[clamp(1.1rem,2.6vw,1.6rem)] text-white/70">
+            <p className="font-editorial italic text-[clamp(1.2rem,3vw,1.75rem)] text-slate-200 font-medium text-shadow-subtle">
               Of course... not everything about that night was poetic.
             </p>
 
             <h3
               id="the-burping-competition-title"
-              className="font-editorial text-[clamp(2.2rem,6.2vw,4.25rem)] font-bold text-white uppercase tracking-[0.14em] leading-tight"
-              style={{
-                textShadow: '0 0 25px rgba(255, 255, 255, 0.4)',
-              }}
+              className="font-editorial text-[clamp(2.3rem,6.8vw,4.5rem)] font-bold text-white uppercase tracking-[0.14em] leading-tight starlight-heavy-glow"
             >
               THE BURPING COMPETITION
             </h3>
 
             <div className="flex items-center justify-center gap-3 text-white">
-              <span className="font-editorial text-[clamp(1.6rem,4vw,2.5rem)] font-semibold">
+              <span className="font-editorial text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold text-shadow-subtle">
                 I won.
               </span>
-              <span className="text-white/40">•</span>
-              <span className="font-editorial italic text-[clamp(1.4rem,3.6vw,2.2rem)] text-white/80">
+              <span className="text-white/60">•</span>
+              <span className="font-editorial italic text-[clamp(1.5rem,4vw,2.4rem)] text-cyan-100 font-semibold text-shadow-subtle">
                 Obviously.
               </span>
             </div>
 
             <div className="space-y-1">
-              <p className="font-body font-light text-xs sm:text-sm text-white/65 tracking-wide">
+              <p className="font-body font-medium text-xs sm:text-sm text-slate-100 tracking-wide text-shadow-subtle">
                 This remains an objective historical fact.
               </p>
-              <p className="font-body font-light text-[11px] sm:text-xs text-white/45 italic">
+              <p className="font-body font-medium text-[11px] sm:text-xs text-slate-300 italic text-shadow-subtle">
                 (Her legal team has formally disputed the result.)
               </p>
             </div>
@@ -469,11 +494,11 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
               visibility: intimateReturnOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.35rem,3.6vw,2.25rem)] text-white/85 leading-snug">
+            <p className="font-editorial italic text-[clamp(1.45rem,3.8vw,2.4rem)] text-white font-medium leading-snug text-shadow-subtle">
               Somewhere in that long, ridiculous conversation...
             </p>
-            <div className="w-12 h-[1px] bg-white/25 mx-auto" />
-            <p className="font-editorial text-[clamp(1.75rem,4.6vw,3.25rem)] text-white font-medium leading-snug tracking-wide starlight-heavy-glow">
+            <div className="w-12 h-[1px] bg-white/40 mx-auto" />
+            <p className="font-editorial text-[clamp(1.9rem,5vw,3.5rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
               something between us started becoming real.
             </p>
           </div>
@@ -490,21 +515,21 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
             }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-white/60 font-medium">
+              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
                 The Story Continues
               </span>
-              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
+              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
             </div>
 
             <h3
               id="then-came-the-day-we-met-title"
-              className="font-editorial text-[clamp(2rem,5.5vw,3.75rem)] font-light text-white leading-snug tracking-wide max-w-xl mb-4 starlight-heavy-glow"
+              className="font-editorial text-[clamp(2.1rem,5.8vw,4rem)] font-bold text-white leading-snug tracking-wide max-w-xl mb-4 starlight-heavy-glow"
             >
               Then came the day we finally met.
             </h3>
 
-            <p className="font-body font-light text-[clamp(0.95rem,2.2vw,1.25rem)] text-white/75 leading-relaxed max-w-md mx-auto mb-6">
+            <p className="font-body font-medium text-[clamp(1.05rem,2.4vw,1.35rem)] text-slate-100 leading-relaxed max-w-md mx-auto mb-6 text-shadow-subtle">
               When voices across midnight became eyes in the real world.
             </p>
 
@@ -538,14 +563,14 @@ export const FirstCallChapter: React.FC<FirstCallChapterProps> = ({
                   className={`transition-all duration-300 rounded-full flex-shrink-0 cursor-pointer ${
                     isActive
                       ? 'w-6 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
-                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
+                      : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/70'
                   }`}
                 />
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs text-slate-300 uppercase tracking-[0.2em] font-medium text-shadow-subtle">
             <span>{scrollProgress > 0.9 ? 'Chapter IV Complete' : 'Scroll gently through midnight'}</span>
           </div>
         </footer>

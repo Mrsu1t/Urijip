@@ -76,15 +76,11 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
   };
 
   // -------------------------------------------------------------
-  // ATMOSPHERIC PALETTE TRANSFORMATION (Rose -> Bubblegum Pink -> Warm Cream -> Soft White)
+  // ATMOSPHERIC PALETTE TRANSFORMATION (Night Sky -> Aurora -> Starlight Warmth)
   // -------------------------------------------------------------
-  // Transition out of cold night:
-  // 1. Warm Rose aura (0.00 -> 0.40)
-  const roseAuraAlpha = range(scrollProgress, 0.0, 0.35, 0.35, 0.7);
-  // 2. Bubblegum Pink warmth (0.20 -> 0.70)
-  const pinkWarmthAlpha = range(scrollProgress, 0.20, 0.55, 0, 0.6);
-  // 3. Luminous Warm Cream core (0.45 -> 1.00)
-  const warmCreamAlpha = range(scrollProgress, 0.45, 0.85, 0, 0.7);
+  const nightSkyAlpha = range(scrollProgress, 0.0, 0.35, 0.35, 0.7);
+  const auroraWarmthAlpha = range(scrollProgress, 0.20, 0.55, 0, 0.5);
+  const warmCreamAlpha = range(scrollProgress, 0.45, 0.85, 0, 0.4);
 
   // -------------------------------------------------------------
   // SCROLL PROGRESS INTERPOLATION CHOREOGRAPHY (0.00 to 1.00)
@@ -156,34 +152,34 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
     >
       {/* ------------------------------------------------------------- */}
       {/* ABSTRACT VISUAL HOME MOTIF & COLOR TRANSFORMATION LAYERS     */}
-      {/* Rose -> Bubblegum Pink -> Warm Cream -> Soft White Glow       */}
+      {/* Deep Night Sky & Aurora Emerald / Cyan Glow                   */}
       {/* ------------------------------------------------------------- */}
 
-      {/* Layer A: Expansive Rose Atmosphere */}
+      {/* Layer A: Expansive Night Sky Atmosphere */}
       <div
         className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(ellipse 110% 95% at 50% 50%, rgba(175, 55, 115, 0.55) 0%, rgba(110, 32, 78, 0.38) 50%, rgba(45, 15, 38, 0.2) 85%, transparent 100%)',
-          opacity: roseAuraAlpha,
+          background: 'radial-gradient(ellipse 110% 95% at 50% 50%, rgba(15, 23, 42, 0.7) 0%, rgba(10, 15, 30, 0.5) 50%, transparent 100%)',
+          opacity: nightSkyAlpha,
           zIndex: Z_INDEX_TOKENS.ambientGlow + 5,
         }}
       />
 
-      {/* Layer B: Expansive Bubblegum Pink Radiance */}
+      {/* Layer B: Expansive Aurora Cyan/Emerald Radiance */}
       <div
         className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.45) 0%, rgba(219, 39, 119, 0.28) 45%, rgba(157, 23, 77, 0.12) 80%, transparent 100%)',
-          opacity: pinkWarmthAlpha,
+          background: 'radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.18) 0%, rgba(14, 165, 233, 0.12) 45%, transparent 100%)',
+          opacity: auroraWarmthAlpha,
           zIndex: Z_INDEX_TOKENS.ambientGlow + 6,
         }}
       />
 
-      {/* Layer C: Warm Cream & Soft White Luminous Sanctuary Pool */}
+      {/* Layer C: Starlight Luminous Sanctuary Pool */}
       <div
         className="fixed inset-0 pointer-events-none transition-opacity duration-1000"
         style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 245, 238, 0.22) 0%, rgba(254, 215, 226, 0.15) 45%, transparent 80%)',
+          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 255, 255, 0.12) 0%, rgba(186, 230, 253, 0.05) 45%, transparent 80%)',
           opacity: warmCreamAlpha,
           zIndex: Z_INDEX_TOKENS.ambientGlow + 7,
         }}
@@ -207,7 +203,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="w-[70vw] max-w-[650px] h-[70vw] max-h-[650px] rounded-full border border-pink-200/20 bg-[radial-gradient(circle,_rgba(255,225,235,0.08)_0%,_transparent_70%)] blur-md pointer-events-none"
+          className="w-[70vw] max-w-[650px] h-[70vw] max-h-[650px] rounded-full border border-white/20 bg-[radial-gradient(circle,_rgba(255,255,255,0.08)_0%,_transparent_70%)] blur-md pointer-events-none"
         />
         <motion.div
           animate={{
@@ -219,7 +215,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute w-[90vw] max-w-[820px] h-[90vw] max-h-[820px] rounded-full border border-rose-300/10 pointer-events-none"
+          className="absolute w-[90vw] max-w-[820px] h-[90vw] max-h-[820px] rounded-full border border-cyan-400/10 pointer-events-none"
         />
       </div>
 
@@ -229,11 +225,11 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
         {/* Top Header / Chapter VI Sanctuary Marker */}
         <header className="w-full flex flex-col items-center flex-shrink-0 z-30 pt-2">
           <div className="flex items-center gap-3">
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-pink-200/40" />
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.32em] text-pink-100/75 font-medium">
+            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
+            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.32em] text-slate-300 font-medium">
               Chapter VI • The Name of Home
             </span>
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-pink-200/40" />
+            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
           </div>
         </header>
 
@@ -250,13 +246,13 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: frag1Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.28em] text-pink-200/70">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.28em] text-slate-300">
               The Origin
             </span>
             <h3 className="font-editorial text-[clamp(2rem,5.5vw,3.75rem)] font-light text-white leading-snug tracking-wide starlight-heavy-glow">
               There&apos;s a name I gave you.
             </h3>
-            <p className="font-body font-light text-xs sm:text-sm text-pink-100/65 italic">
+            <p className="font-body font-light text-xs sm:text-sm text-slate-300 italic">
               A word that holds everything.
             </p>
           </div>
@@ -271,7 +267,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: frag2Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.4rem,3.5vw,2.2rem)] text-pink-100/85">
+            <p className="font-editorial italic text-[clamp(1.4rem,3.5vw,2.2rem)] text-slate-200">
               Because you became...
             </p>
             <p className="font-editorial text-[clamp(1.85rem,4.8vw,3.35rem)] text-white font-normal leading-snug tracking-wide starlight-heavy-glow">
@@ -293,13 +289,13 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               id="the-word-home"
               className="font-editorial text-[clamp(3rem,9vw,6.5rem)] font-light text-white tracking-[0.18em] leading-none starlight-heavy-glow"
               style={{
-                textShadow: '0 0 40px rgba(255, 235, 245, 0.8), 0 0 80px rgba(232, 128, 185, 0.45)',
+                textShadow: '0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(56, 189, 248, 0.35)',
               }}
             >
               Home.
             </h2>
-            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-pink-200/50 to-transparent my-2" />
-            <p className="font-body font-light text-xs sm:text-sm text-pink-100/70 uppercase tracking-[0.25em]">
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent my-2" />
+            <p className="font-body font-light text-xs sm:text-sm text-slate-300 uppercase tracking-[0.25em]">
               Where the heart rests
             </p>
           </div>
@@ -316,9 +312,9 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
             }}
           >
             {/* Soft subtle identity pill */}
-            <div className="flex items-center gap-2 px-4 py-1 rounded-full border border-pink-200/30 bg-pink-300/[0.08] backdrop-blur-sm mb-1">
-              <Home className="w-3.5 h-3.5 text-pink-200" />
-              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-pink-100 font-semibold">
+            <div className="flex items-center gap-2 px-4 py-1 rounded-full border border-white/20 bg-white/[0.06] backdrop-blur-sm mb-1">
+              <Home className="w-3.5 h-3.5 text-cyan-200" />
+              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-slate-200 font-semibold">
                 Identity
               </span>
             </div>
@@ -328,19 +324,19 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               id="urijip-grand-identity-title"
               className="font-editorial text-[clamp(3.5rem,12vw,8.5rem)] font-bold text-white uppercase tracking-[0.22em] sm:tracking-[0.32em] leading-none select-none starlight-heavy-glow"
               style={{
-                textShadow: '0 0 50px rgba(255, 240, 248, 0.85), 0 0 90px rgba(232, 128, 185, 0.5), 0 0 130px rgba(180, 70, 130, 0.3)',
+                textShadow: '0 0 50px rgba(255, 255, 255, 0.85), 0 0 90px rgba(56, 189, 248, 0.45)',
               }}
             >
               URIJIP
             </h1>
 
             {/* 우리집 - Korean Hangul Serif Subheading */}
-            <p className="font-editorial text-[clamp(1.75rem,5vw,3.25rem)] text-pink-200/95 font-light tracking-[0.35em] leading-snug">
+            <p className="font-editorial text-[clamp(1.75rem,5vw,3.25rem)] text-cyan-100/95 font-light tracking-[0.35em] leading-snug">
               우리집
             </p>
 
             {/* English translation */}
-            <p className="font-editorial italic text-[clamp(1.35rem,3.6vw,2.35rem)] text-rose-100/90 tracking-widest pt-1">
+            <p className="font-editorial italic text-[clamp(1.35rem,3.6vw,2.35rem)] text-slate-200 tracking-widest pt-1">
               &ldquo;Our home.&rdquo;
             </p>
           </div>
@@ -355,7 +351,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: meaningOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.28em] text-pink-200/70 font-medium mb-1">
+            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.28em] text-slate-300 font-medium mb-1">
               The Meaning
             </span>
 
@@ -363,13 +359,13 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               <p className="font-editorial text-[clamp(1.3rem,3.2vw,2rem)] font-light">
                 Home is where I don&apos;t have to pretend.
               </p>
-              <p className="font-editorial italic text-[clamp(1.25rem,3vw,1.9rem)] text-pink-100/85">
+              <p className="font-editorial italic text-[clamp(1.25rem,3vw,1.9rem)] text-slate-200">
                 Where I can be vulnerable.
               </p>
               <p className="font-editorial text-[clamp(1.25rem,3vw,1.9rem)] font-light">
                 Where I can breathe.
               </p>
-              <p className="font-editorial italic text-[clamp(1.25rem,3vw,1.9rem)] text-pink-100/85">
+              <p className="font-editorial italic text-[clamp(1.25rem,3vw,1.9rem)] text-slate-200">
                 Where I can be completely myself.
               </p>
               <p className="font-editorial text-[clamp(1.25rem,3vw,1.9rem)] font-light">
@@ -377,7 +373,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               </p>
             </div>
 
-            <div className="w-12 h-[1px] bg-pink-200/30 my-2 mx-auto" />
+            <div className="w-12 h-[1px] bg-white/30 my-2 mx-auto" />
 
             <p className="font-editorial text-[clamp(1.6rem,4.2vw,2.75rem)] text-white font-normal leading-snug tracking-wide starlight-heavy-glow">
               That&apos;s what being with you feels like.
@@ -394,14 +390,14 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: responsibilityOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full border border-pink-200/20 bg-pink-300/[0.05] mb-1">
-              <Shield className="w-3.5 h-3.5 text-pink-200" />
-              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-pink-100/80 font-medium">
+            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/20 bg-white/[0.05] mb-1">
+              <Shield className="w-3.5 h-3.5 text-cyan-200" />
+              <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-slate-200 font-medium">
                 Sacred Trust
               </span>
             </div>
 
-            <p className="font-editorial italic text-[clamp(1.3rem,3.2vw,2rem)] text-pink-100/90 leading-snug max-w-xl">
+            <p className="font-editorial italic text-[clamp(1.3rem,3.2vw,2rem)] text-slate-200 leading-snug max-w-xl">
               Calling you home isn&apos;t just about how you make me feel.
             </p>
 
@@ -411,13 +407,13 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
 
             <div className="space-y-1.5 pt-1 text-white/80">
               <p className="font-editorial text-[clamp(1.15rem,2.6vw,1.65rem)] font-light">You&apos;ve trusted me.</p>
-              <p className="font-editorial italic text-[clamp(1.15rem,2.6vw,1.65rem)] text-pink-100/85">You&apos;ve respected my boundaries.</p>
+              <p className="font-editorial italic text-[clamp(1.15rem,2.6vw,1.65rem)] text-slate-200">You&apos;ve respected my boundaries.</p>
               <p className="font-editorial text-[clamp(1.15rem,2.6vw,1.65rem)] font-light">You&apos;ve respected my choices.</p>
-              <p className="font-editorial italic text-[clamp(1.15rem,2.6vw,1.65rem)] text-pink-100/85">You&apos;ve made space for my vulnerability.</p>
+              <p className="font-editorial italic text-[clamp(1.15rem,2.6vw,1.65rem)] text-slate-200">You&apos;ve made space for my vulnerability.</p>
             </div>
 
             <div className="pt-2">
-              <p className="font-body font-normal text-xs sm:text-sm uppercase tracking-[0.25em] text-pink-200">
+              <p className="font-body font-normal text-xs sm:text-sm uppercase tracking-[0.25em] text-cyan-200">
                 I don&apos;t take that trust lightly.
               </p>
             </div>
@@ -434,25 +430,25 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: promiseOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <div className="flex items-center gap-2 text-pink-200/80 mb-1">
-              <Sparkles className="w-4 h-4 text-pink-200 animate-pulse" />
+            <div className="flex items-center gap-2 text-cyan-200/80 mb-1">
+              <Sparkles className="w-4 h-4 text-cyan-200 animate-pulse" />
               <span className="font-body text-xs sm:text-sm uppercase tracking-[0.28em]">
                 The Solemn Vow
               </span>
-              <Sparkles className="w-4 h-4 text-pink-200 animate-pulse" />
+              <Sparkles className="w-4 h-4 text-cyan-200 animate-pulse" />
             </div>
 
             <h2
               id="promise-statement"
               className="font-editorial text-[clamp(2.25rem,6.8vw,4.85rem)] font-bold text-white leading-[1.25] tracking-wide sm:tracking-wider starlight-heavy-glow"
               style={{
-                textShadow: '0 0 35px rgba(255, 235, 245, 0.85), 0 0 75px rgba(232, 128, 185, 0.45)',
+                textShadow: '0 0 35px rgba(255, 255, 255, 0.85), 0 0 75px rgba(56, 189, 248, 0.45)',
               }}
             >
               I will do my best to never make you regret trusting me.
             </h2>
 
-            <p className="font-body font-light text-xs sm:text-sm text-pink-100/70 uppercase tracking-[0.25em]">
+            <p className="font-body font-light text-xs sm:text-sm text-slate-300 uppercase tracking-[0.25em]">
               A promise etched across every tomorrow
             </p>
           </div>
@@ -467,7 +463,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: threeLinesOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-pink-200/70 font-medium">
+            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-slate-300 font-medium">
               Every Sanctuary
             </span>
 
@@ -475,7 +471,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               I hope I&apos;m always your room.
             </p>
 
-            <p className="font-editorial italic text-[clamp(2rem,5.2vw,3.5rem)] text-pink-100 font-normal leading-snug tracking-wide">
+            <p className="font-editorial italic text-[clamp(2rem,5.2vw,3.5rem)] text-slate-200 font-normal leading-snug tracking-wide">
               Your pillow.
             </p>
 
@@ -494,11 +490,11 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               visibility: humorOpacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-pink-200/70">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-300">
               A Small Disclaimer
             </span>
 
-            <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.35rem)] text-pink-100/85">
+            <p className="font-editorial italic text-[clamp(1.5rem,3.8vw,2.35rem)] text-slate-200">
               Although...
             </p>
 
@@ -506,8 +502,8 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               Given that we&apos;re both last-borns...
             </p>
 
-            <div className="px-5 py-2 rounded-full border border-pink-200/20 bg-pink-300/[0.06] backdrop-blur-sm">
-              <p className="font-body text-xs sm:text-sm text-pink-200/90 font-medium tracking-wide">
+            <div className="px-5 py-2 rounded-full border border-white/20 bg-white/[0.06] backdrop-blur-sm">
+              <p className="font-body text-xs sm:text-sm text-slate-200 font-medium tracking-wide">
                 I may need occasional adult supervision too.
               </p>
             </div>
@@ -525,14 +521,14 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
             }}
           >
             <div className="flex items-center gap-3 mb-1">
-              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-pink-200/40" />
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.28em] text-pink-200 font-medium">
+              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/40" />
+              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.28em] text-slate-300 font-medium">
                 Our Home • 우리집
               </span>
-              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-pink-200/40" />
+              <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/40" />
             </div>
 
-            <p className="font-editorial italic text-[clamp(1.6rem,4vw,2.75rem)] text-pink-100/90 leading-snug tracking-wide">
+            <p className="font-editorial italic text-[clamp(1.6rem,4vw,2.75rem)] text-slate-200 leading-snug tracking-wide">
               That&apos;s why I call you Urijip.
             </p>
 
@@ -540,7 +536,7 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
               id="you-are-home-to-me-title"
               className="font-editorial text-[clamp(2.5rem,7.5vw,5.5rem)] font-bold text-white leading-tight tracking-wide starlight-heavy-glow"
               style={{
-                textShadow: '0 0 45px rgba(255, 240, 248, 0.9), 0 0 90px rgba(232, 128, 185, 0.5)',
+                textShadow: '0 0 45px rgba(255, 255, 255, 0.9), 0 0 90px rgba(56, 189, 248, 0.45)',
               }}
             >
               You are home to me.
@@ -550,14 +546,14 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
             <motion.div
               animate={{
                 scale: [1, 1.1, 1],
-                opacity: [0.4, 0.7, 0.4],
+                opacity: [0.35, 0.6, 0.35],
               }}
               transition={{
                 duration: 8,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-[radial-gradient(circle,_rgba(250,225,240,0.22)_0%,_rgba(232,128,185,0.1)_45%,_transparent_75%)] blur-2xl pointer-events-none mt-2"
+              className="w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.2)_0%,_rgba(56,189,248,0.1)_45%,_transparent_75%)] blur-2xl pointer-events-none mt-2"
             />
           </div>
 
@@ -576,15 +572,15 @@ export const UrijipChapter: React.FC<UrijipChapterProps> = ({
                   aria-label={step.label}
                   className={`transition-all duration-300 rounded-full flex-shrink-0 cursor-pointer ${
                     isActive
-                      ? 'w-6 h-1.5 bg-pink-200 shadow-[0_0_8px_rgba(255,220,240,0.9)]'
-                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-pink-200/50'
+                      ? 'w-6 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]'
+                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
                   }`}
                 />
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-pink-100/40 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-slate-400 uppercase tracking-[0.2em]">
             <span>{scrollProgress > 0.9 ? 'Chapter VI Complete' : 'Scroll gently through our home'}</span>
           </div>
         </footer>

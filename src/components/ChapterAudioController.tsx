@@ -17,6 +17,8 @@ export interface ChapterAudioControllerProps {
 export const ChapterAudioController: React.FC<ChapterAudioControllerProps> = ({
   isPlaying,
   progress = 0,
+  currentTime = 0,
+  duration = 0,
   onTogglePlay,
   label = 'LISTEN',
   subtext = "There's something I'd like you to hear.",
@@ -50,7 +52,7 @@ export const ChapterAudioController: React.FC<ChapterAudioControllerProps> = ({
       <div className="relative flex flex-col items-center">
         {/* Soft Ambient Illumination Aura when playing */}
         <div
-          className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(190,225,255,0.25)_0%,_rgba(130,180,245,0.08)_50%,_transparent_75%)] blur-md transition-all duration-700 pointer-events-none"
+          className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(212,108,166,0.25)_0%,_rgba(211,192,224,0.1)_50%,_transparent_75%)] blur-md transition-all duration-700 pointer-events-none"
           style={{
             opacity: isPlaying ? 1 : 0.2,
             transform: `scale(${isPlaying ? 1.25 : 0.95})`,
@@ -70,11 +72,11 @@ export const ChapterAudioController: React.FC<ChapterAudioControllerProps> = ({
           }}
           aria-label={isPlaying ? 'Pause voice note' : 'Play voice note'}
           aria-pressed={isPlaying}
-          className="group relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 bg-white/[0.04] hover:bg-white/[0.08] active:scale-95 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none touch-manipulation"
+          className="group relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 bg-white/[0.05] hover:bg-white/[0.1] active:scale-95 focus-visible:ring-2 focus-visible:ring-[#ffafd7] focus-visible:outline-none touch-manipulation"
           style={{
             boxShadow: isPlaying
-              ? '0 0 24px 2px rgba(180, 220, 255, 0.25)'
-              : '0 0 12px 1px rgba(0, 0, 0, 0.5)',
+              ? '0 0 24px 2px rgba(212, 108, 166, 0.35)'
+              : '0 0 12px 1px rgba(0, 0, 0, 0.7)',
           }}
         >
           {/* SVG Progress Ring */}
@@ -107,13 +109,13 @@ export const ChapterAudioController: React.FC<ChapterAudioControllerProps> = ({
             <defs>
               <linearGradient id="audioProgressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#b4d7ff" />
+                <stop offset="100%" stopColor="#ffafd7" />
               </linearGradient>
             </defs>
           </svg>
 
           {/* Center Play/Pause Icon */}
-          <div className="relative z-10 text-white/80 group-hover:text-white transition-all duration-300 flex items-center justify-center">
+          <div className="relative z-10 text-white group-hover:text-[#ffafd7] transition-all duration-300 flex items-center justify-center">
             {isPlaying ? (
               <Pause className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
             ) : (
@@ -122,13 +124,22 @@ export const ChapterAudioController: React.FC<ChapterAudioControllerProps> = ({
           </div>
         </button>
 
-        {/* Cinematic Label */}
+        {/* Cinematic Label & Timestamp */}
         <span
           id="voice-note-action-label"
-          className="mt-2.5 font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-white/60 group-hover:text-white/90 transition-colors duration-300"
+          className="mt-2.5 font-mono-label text-[10px] sm:text-xs tracking-[0.25em] text-[#e2e2e2] group-hover:text-[#ffafd7] transition-colors duration-300"
         >
           {isPlaying ? 'PAUSE' : label}
         </span>
+
+        {duration !== undefined && duration > 0 && (
+          <span
+            id="voice-note-timestamp"
+            className="mt-1 font-mono-label text-[9px] sm:text-[10px] text-[#ffafd7]/80 tracking-wider"
+          >
+            {Math.floor((currentTime || 0) / 60)}:{Math.floor((currentTime || 0) % 60).toString().padStart(2, '0')} / {Math.floor(duration / 60)}:{Math.floor(duration % 60).toString().padStart(2, '0')}
+          </span>
+        )}
       </div>
     </div>
   );

@@ -132,14 +132,14 @@ export const StarlightEyesPhoto: React.FC<StarlightEyesPhotoProps> = ({
       {/* Frame Container Perfectly Matched to the Natural Dimensions with Zero Cropping */}
       <div
         id="eyes-photograph-frame"
-        className="relative w-full max-w-[94vw] sm:max-w-[88vw] md:max-w-[760px] lg:max-w-[900px] xl:max-w-[980px] rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 border border-white/10 bg-[#030508]"
+        className="relative w-full max-w-[94vw] sm:max-w-[88vw] md:max-w-[760px] lg:max-w-[900px] xl:max-w-[980px] rounded-xl overflow-hidden transition-all duration-300 border border-white/10 bg-[#121414]"
         style={{
           aspectRatio: `${aspectRatio}`,
           opacity,
           transform: `scale(${scale})`,
           boxShadow: isLuminous || clampedProgress > 0.6
-            ? '0 0 50px 10px rgba(180, 215, 255, 0.15), 0 0 90px 20px rgba(120, 175, 255, 0.08)'
-            : '0 0 25px 2px rgba(0, 0, 0, 0.85)',
+            ? '0 0 50px 10px rgba(212, 108, 166, 0.2), 0 0 90px 20px rgba(211, 192, 224, 0.12)'
+            : '0 0 25px 2px rgba(0, 0, 0, 0.95)',
         }}
       >
         {/* The Real Eyes Photograph (Framed with object-contain and exact aspect match) */}
@@ -287,7 +287,7 @@ export const StarlightEyesPhoto: React.FC<StarlightEyesPhotoProps> = ({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-20 px-2.5 py-1 rounded-full bg-black/60 hover:bg-black/85 border border-white/20 text-[9px] sm:text-[10px] text-white/50 hover:text-white/90 backdrop-blur-md transition-all duration-300 opacity-0 hover:opacity-100 focus:opacity-100 cursor-pointer"
+          className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-20 px-3 py-1 rounded-[4px] bg-[#1a1c1c]/80 hover:bg-[#282a2b] border border-white/15 text-[10px] sm:text-[11px] font-mono-label text-[#e2e2e2] hover:text-[#ffafd7] hover:border-[#ffafd7]/40 backdrop-blur-md transition-all duration-300 opacity-0 hover:opacity-100 focus:opacity-100 cursor-pointer"
           title="Upload or update eyes photograph"
         >
           Replace Photo

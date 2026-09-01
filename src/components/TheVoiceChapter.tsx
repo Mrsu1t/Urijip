@@ -8,10 +8,9 @@ import { Z_INDEX_TOKENS } from '../tokens';
 
 /**
  * VOICE NOTE INTEGRATION POINT
- * Set this to the real audio file URL (e.g., '/assets/voice_note.mp3') when ready.
- * When null or empty, the chapter operates gracefully using safe placeholder state.
+ * Real audio file URL for The Voice chapter (11 November 2025).
  */
-export const VOICE_NOTE_AUDIO_SRC: string | null = null;
+export const VOICE_NOTE_AUDIO_SRC = 'https://www.image2url.com/r2/default/audio/1788283760310-6fbad665-7ecc-4489-92cb-c3b6d394345f.ogg';
 
 export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
   onProgressChange,
@@ -62,9 +61,9 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
     };
   }, [onProgressChange]);
 
-  // Pause audio automatically if user scrolls far away from the audio moment
+  // Pause audio automatically if user leaves Chapter 3 entirely
   useEffect(() => {
-    if (audio.isPlaying && (scrollProgress < 0.6 || scrollProgress > 0.96)) {
+    if (audio.isPlaying && (scrollProgress < 0.005 || scrollProgress > 0.995)) {
       audio.pause();
     }
   }, [scrollProgress, audio]);
@@ -174,15 +173,31 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
       {/* Sticky Viewport Stage (100svh) */}
       <div className="sticky top-0 h-[100svh] w-full flex flex-col items-center justify-between px-4 sm:px-8 md:px-12 py-5 sm:py-8 overflow-hidden select-none">
         
-        {/* Top Header / Constellation Chapter Marker */}
-        <header className="w-full flex flex-col items-center flex-shrink-0 z-30 pt-2">
-          <div className="flex items-center gap-3">
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
-            <span className="font-body text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/60 font-medium">
+        {/* Top Header / Constellation Chapter Marker with Audio Indicator */}
+        <header className="w-full flex items-center justify-between flex-shrink-0 z-30 pt-1 sm:pt-2">
+          <div className="flex items-center gap-2">
+            <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20 text-[10px] sm:text-xs">
+              11 NOV 2025
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-4 sm:w-10 h-[1px] bg-gradient-to-r from-transparent to-[#ffafd7]/40" />
+            <span className="font-mono-label text-[10px] sm:text-xs text-[#e2e2e2] tracking-[0.2em] sm:tracking-[0.3em] font-semibold text-shadow-subtle">
               Chapter III • The Beginning
             </span>
-            <div className="w-6 sm:w-12 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
+            <div className="w-4 sm:w-10 h-[1px] bg-gradient-to-l from-transparent to-[#ffafd7]/40" />
           </div>
+
+          <button
+            type="button"
+            onClick={audio.togglePlay}
+            aria-label={audio.isPlaying ? "Pause voice note" : "Play voice note"}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full border border-[#ffafd7]/25 bg-[#ffafd7]/[0.08] hover:bg-[#ffafd7]/[0.16] text-[10px] sm:text-xs font-mono-label text-[#ffafd7] backdrop-blur-md transition-all duration-300 cursor-pointer"
+          >
+            <span className={`inline-block w-1.5 h-1.5 rounded-full ${audio.isPlaying ? 'bg-[#ffafd7] animate-ping' : 'bg-[#ffafd7]/60'}`} />
+            <span>{audio.isPlaying ? 'PLAYING' : 'VOICE NOTE'}</span>
+          </button>
         </header>
 
         {/* Center Stage: Sequential Memory Fragments & Climax */}
@@ -191,27 +206,40 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
           {/* 1. Chapter Title & Starting Date (11 NOVEMBER 2025) */}
           <div
             id="voice-chapter-title-card"
-            className="absolute text-center max-w-2xl px-4 transition-all duration-100 ease-out z-30 pointer-events-none"
+            className="absolute text-center max-w-2xl px-4 flex flex-col items-center justify-center transition-all duration-100 ease-out z-30"
             style={{
               opacity: titleOpacity,
               transform: `translateY(${titleY}px)`,
               visibility: titleOpacity > 0.005 ? 'visible' : 'hidden',
+              pointerEvents: titleOpacity > 0.35 ? 'auto' : 'none',
             }}
           >
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50 font-medium">
-                11 November 2025
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20">
+                11 NOVEMBER 2025
               </span>
             </div>
             <h2
               id="the-voice-hero-title"
-              className="font-editorial text-[clamp(2.5rem,8vw,5.5rem)] font-bold text-white uppercase tracking-[0.16em] sm:tracking-[0.22em] starlight-heavy-glow leading-none select-none mb-4"
+              className="font-editorial text-[clamp(2.6rem,8.5vw,5.75rem)] font-bold text-white uppercase tracking-[0.16em] sm:tracking-[0.22em] starlight-heavy-glow leading-none select-none mb-3"
             >
               THE VOICE
             </h2>
-            <p className="font-editorial italic text-[clamp(1.1rem,2.8vw,1.65rem)] text-white/70 tracking-wide max-w-md mx-auto">
+            <p className="font-editorial italic text-[clamp(1.2rem,3vw,1.85rem)] text-[#e2e2e2] font-medium tracking-wide max-w-md mx-auto text-shadow-subtle mb-4">
               Traveling back to the night everything began.
             </p>
+
+            {/* Voice Note Audio Controller at the Beginning of Chapter 3 */}
+            <ChapterAudioController
+              isPlaying={audio.isPlaying}
+              progress={audio.progress}
+              currentTime={audio.currentTime}
+              duration={audio.duration}
+              onTogglePlay={audio.togglePlay}
+              label="LISTEN TO HER VOICE"
+              subtext="11 Nov 2025 • The Night Everything Began"
+              className="mt-1"
+            />
           </div>
 
           {/* 2. Fragment 1: "A TikTok Live." */}
@@ -224,7 +252,7 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               visibility: frag1Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.75rem,4.5vw,3rem)] text-white/90 leading-snug tracking-wide text-shadow-subtle">
+            <p className="font-editorial italic text-[clamp(1.85rem,4.8vw,3.2rem)] text-white font-medium leading-snug tracking-wide text-shadow-subtle">
               A TikTok Live.
             </p>
           </div>
@@ -240,7 +268,7 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
             }}
           >
             <VoiceSoundWave intensity={soundWaveIntensity} isPlaying={audio.isPlaying} className="mb-2" />
-            <p className="font-editorial text-[clamp(1.85rem,4.8vw,3.25rem)] text-white font-medium leading-snug tracking-wide starlight-heavy-glow">
+            <p className="font-editorial text-[clamp(2rem,5.2vw,3.5rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
               Then I heard your voice.
             </p>
           </div>
@@ -255,11 +283,11 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               visibility: frag3Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.6rem,4vw,2.75rem)] text-white/95 leading-snug">
+            <p className="font-editorial italic text-[clamp(1.75rem,4.5vw,3rem)] text-white font-medium leading-snug text-shadow-subtle">
               I complimented it.
             </p>
-            <div className="w-12 h-[1px] bg-white/20 mx-auto" />
-            <p className="font-body font-light text-[clamp(1.1rem,2.5vw,1.6rem)] text-white/80 tracking-wide">
+            <div className="w-12 h-[1px] bg-white/40 mx-auto" />
+            <p className="font-body font-medium text-[clamp(1.15rem,2.7vw,1.7rem)] text-slate-100 tracking-wide text-shadow-subtle">
               I told you how much I loved it, and I followed you first.
             </p>
           </div>
@@ -274,10 +302,10 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               visibility: frag4Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
               And somehow...
             </span>
-            <p className="font-editorial text-[clamp(1.85rem,4.8vw,3.25rem)] text-white font-normal leading-snug tracking-wide text-shadow-subtle">
+            <p className="font-editorial text-[clamp(2rem,5.2vw,3.5rem)] text-white font-semibold leading-snug tracking-wide text-shadow-subtle">
               TikTok became Snapchat.
             </p>
           </div>
@@ -292,10 +320,10 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               visibility: frag5Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial text-[clamp(1.85rem,4.8vw,3.25rem)] text-white font-normal leading-snug tracking-wide text-shadow-subtle">
+            <p className="font-editorial text-[clamp(2rem,5.2vw,3.5rem)] text-white font-semibold leading-snug tracking-wide text-shadow-subtle">
               Snapchat became WhatsApp.
             </p>
-            <p className="font-body font-light text-[clamp(0.95rem,2.2vw,1.35rem)] text-white/70 italic max-w-lg mx-auto">
+            <p className="font-body font-medium text-[clamp(1.05rem,2.4vw,1.45rem)] text-slate-100 italic max-w-lg mx-auto text-shadow-subtle">
               Apparently, neither of us knew how to end a conversation.
             </p>
           </div>
@@ -310,10 +338,10 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               visibility: frag6Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-white/50">
+            <span className="font-editorial italic text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 font-semibold text-shadow-subtle">
               And eventually...
             </span>
-            <p className="font-editorial text-[clamp(2rem,5.2vw,3.65rem)] text-white font-medium leading-snug tracking-wide starlight-heavy-glow">
+            <p className="font-editorial text-[clamp(2.1rem,5.5vw,3.85rem)] text-white font-bold leading-snug tracking-wide starlight-heavy-glow">
               WhatsApp became real life.
             </p>
           </div>
@@ -328,7 +356,7 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               visibility: climax1Opacity > 0.005 ? 'visible' : 'hidden',
             }}
           >
-            <p className="font-editorial italic text-[clamp(1.75rem,4.5vw,3rem)] text-white/85 leading-snug tracking-wide">
+            <p className="font-editorial italic text-[clamp(1.85rem,4.8vw,3.2rem)] text-white font-medium leading-snug tracking-wide text-shadow-subtle">
               Before I knew your face,
             </p>
           </div>
@@ -348,12 +376,12 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
             
             <h2
               id="i-knew-your-voice-title"
-              className="font-editorial text-[clamp(2.15rem,6.2vw,4.5rem)] font-bold text-white uppercase tracking-[0.14em] sm:tracking-[0.2em] starlight-heavy-glow leading-tight select-none mb-2 sm:mb-3"
+              className="font-editorial text-[clamp(2.3rem,6.8vw,4.85rem)] font-bold text-white uppercase tracking-[0.14em] sm:tracking-[0.2em] starlight-heavy-glow leading-tight select-none mb-2 sm:mb-3"
             >
               I knew your voice.
             </h2>
 
-            <p className="font-body font-light text-[clamp(0.95rem,2.1vw,1.3rem)] text-white/80 tracking-wide max-w-xl mx-auto leading-relaxed mb-5 sm:mb-6">
+            <p className="font-body font-medium text-[clamp(1.05rem,2.3vw,1.4rem)] text-slate-100 tracking-wide max-w-xl mx-auto leading-relaxed mb-5 sm:mb-6 text-shadow-subtle">
               Your voice was the first part of you that found me.
             </p>
 
@@ -381,19 +409,19 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
               pointerEvents: bridgeOpacity > 0.5 ? 'auto' : 'none',
             }}
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
-              <span className="font-body text-xs sm:text-sm uppercase tracking-[0.25em] text-white/60 font-medium">
-                20 → 21 November 2025
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-r from-transparent to-[#ffafd7]/40" />
+              <span className="glass-chip text-[#ffafd7] border-[#ffafd7]/20">
+                20 → 21 NOVEMBER 2025
               </span>
-              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
+              <div className="w-8 sm:w-16 h-[1px] bg-gradient-to-l from-transparent to-[#ffafd7]/40" />
             </div>
 
-            <h3 className="font-editorial text-[clamp(1.75rem,4.5vw,3rem)] font-light text-white leading-snug tracking-wide max-w-xl mb-4">
-              When one conversation wasn't enough...
+            <h3 className="font-editorial text-[clamp(1.85rem,4.8vw,3.2rem)] font-medium text-white leading-snug tracking-wide max-w-xl mb-4 text-shadow-subtle">
+              When one conversation wasn&apos;t enough...
             </h3>
 
-            <p className="font-body font-light text-[clamp(0.95rem,2.2vw,1.25rem)] text-white/75 leading-relaxed max-w-md mx-auto mb-6">
+            <p className="font-body font-medium text-[clamp(1.05rem,2.4vw,1.35rem)] text-[#e2e2e2] leading-relaxed max-w-md mx-auto mb-6 text-shadow-subtle">
               and the two of us talked straight into the next day.
             </p>
 
@@ -407,7 +435,7 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="w-36 h-36 rounded-full bg-[radial-gradient(circle,_rgba(200,225,255,0.12)_0%,_transparent_70%)] blur-xl pointer-events-none"
+              className="w-36 h-36 rounded-full bg-[radial-gradient(circle,_rgba(212,108,166,0.15)_0%,_transparent_70%)] blur-xl pointer-events-none"
             />
           </div>
 
@@ -427,14 +455,14 @@ export const TheVoiceChapter: React.FC<TheVoiceChapterProps> = ({
                   className={`transition-all duration-300 rounded-full flex-shrink-0 cursor-pointer ${
                     isActive
                       ? 'w-6 h-1.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
-                      : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
+                      : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/70'
                   }`}
                 />
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs text-slate-300 uppercase tracking-[0.2em] font-medium text-shadow-subtle">
             <span>{scrollProgress > 0.9 ? 'The story continues' : 'Scroll gently through memory'}</span>
           </div>
         </footer>
